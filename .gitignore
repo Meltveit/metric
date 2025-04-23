@@ -1,0 +1,34 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Miljøvariabler
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Byggede filer
+/dist
+/build
+/out
+
+# Midlertidige filer
+*.log
+*.cache
+*.tmp
+
+# OS-genererte filer
+.DS_Store
+Thumbs.db
+
+# IDE-filer
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
