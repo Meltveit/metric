@@ -1,0 +1,110 @@
+{
+    "name": "KonverterProff",
+    "short_name": "KonverterProff",
+    "description": "Fast and accurate unit converter for volume, length, weight, temperature and more",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "assets/favicon/icon-72x72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-96x96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-128x128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-152x152.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-384x384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "assets/favicon/maskable-icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ],
+    "shortcuts": [
+      {
+        "name": "Volume Converter",
+        "short_name": "Volume",
+        "description": "Convert between volume units",
+        "url": "/pages/volume.html",
+        "icons": [{ "src": "assets/images/icons/flask.svg", "sizes": "96x96" }]
+      },
+      {
+        "name": "Length Converter",
+        "short_name": "Length",
+        "description": "Convert between length units",
+        "url": "/pages/length.html",
+        "icons": [{ "src": "assets/images/icons/ruler.svg", "sizes": "96x96" }]
+      },
+      {
+        "name": "Weight Converter",
+        "short_name": "Weight",
+        "description": "Convert between weight units",
+        "url": "/pages/weight.html",
+        "icons": [{ "src": "assets/images/icons/weight.svg", "sizes": "96x96" }]
+      },
+      {
+        "name": "Temperature Converter",
+        "short_name": "Temperature",
+        "description": "Convert between temperature units",
+        "url": "/pages/temperature.html",
+        "icons": [{ "src": "assets/images/icons/thermometer.svg", "sizes": "96x96" }]
+      }
+    ],
+    "categories": ["utilities", "productivity", "tools"],
+    "screenshots": [
+      {
+        "src": "assets/images/screenshots/screenshot1.png",
+        "sizes": "1280x720",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/images/screenshots/screenshot2.png",
+        "sizes": "1280x720",
+        "type": "image/png"
+      }
+    ],
+    "prefer_related_applications": false
+  }

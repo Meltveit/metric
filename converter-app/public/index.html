@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KonverterProff - Fast and accurate unit conversion for volume, length, weight, temperature and more">
+    <title>KonverterProff | Unit Conversion Made Easy</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="KonverterProff | Unit Conversion Made Easy">
+    <meta name="description" content="Convert between different units of measurement quickly and accurately. Volume, length, weight, temperature and more.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://konverterproff.com/">
+    <meta property="og:title" content="KonverterProff | Unit Conversion Made Easy">
+    <meta property="og:description" content="Convert between different units of measurement quickly and accurately. Volume, length, weight, temperature and more.">
+    <meta property="og:image" content="assets/images/konverterproff-social.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://konverterproff.com/">
+    <meta property="twitter:title" content="KonverterProff | Unit Conversion Made Easy">
+    <meta property="twitter:description" content="Convert between different units of measurement quickly and accurately. Volume, length, weight, temperature and more.">
+    <meta property="twitter:image" content="assets/images/konverterproff-social.jpg">
+    
+    <!-- Stylesheets -->
+    <link href="css/styles.css" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "KonverterProff",
+      "url": "https://konverterproff.com",
+      "description": "Fast and accurate unit conversion for volume, length, weight, temperature and more",
+      "applicationCategory": "UtilityApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="assets/images/logo.svg" alt="KonverterProff Logo" class="h-8 w-auto mr-3">
+                <h1 class="text-xl font-bold">KonverterProff</h1>
+            </div>
+            <nav>
+                <button class="md:hidden p-2" aria-label="Menu" x-data="{open: false}" @click="open = !open">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="#" class="hover:underline">Home</a></li>
+                    <li><a href="#" class="hover:underline">About</a></li>
+                    <li><a href="#" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl font-bold mb-4">Unit Conversion Made Easy</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                Fast, accurate, and easy-to-use unit converter. Convert between different units of measurement with just a few clicks.
+            </p>
+        </section>
+
+        <section x-data="{ searchTerm: '' }">
+            <div class="mb-8">
+                <div class="relative max-w-md mx-auto">
+                    <input 
+                        type="text" 
+                        x-model="searchTerm" 
+                        placeholder="Search for a unit type..." 
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Core Categories -->
+                <template x-for="category in [
+                    {
+                        title: 'Volume Conversion',
+                        description: 'Convert between liters, gallons, milliliters, and more',
+                        icon: 'flask',
+                        url: 'pages/volume.html'
+                    },
+                    {
+                        title: 'Length Conversion',
+                        description: 'Convert between meters, feet, miles, and more',
+                        icon: 'ruler',
+                        url: 'pages/length.html'
+                    },
+                    {
+                        title: 'Weight Conversion',
+                        description: 'Convert between kilograms, pounds, ounces, and more',
+                        icon: 'weight',
+                        url: 'pages/weight.html'
+                    },
+                    {
+                        title: 'Temperature Conversion',
+                        description: 'Convert between Celsius, Fahrenheit, and Kelvin',
+                        icon: 'thermometer',
+                        url: 'pages/temperature.html'
+                    },
+                    {
+                        title: 'Currency Conversion',
+                        description: 'Convert between different currencies with updated rates',
+                        icon: 'currency',
+                        url: 'pages/currency.html'
+                    },
+                    {
+                        title: 'Digital Units',
+                        description: 'Convert between bytes, kilobytes, megabytes, and more',
+                        icon: 'hard-drive',
+                        url: 'pages/digital.html'
+                    },
+                    {
+                        title: 'Time Conversion',
+                        description: 'Convert between seconds, minutes, hours, and more',
+                        icon: 'clock',
+                        url: 'pages/time.html'
+                    },
+                    {
+                        title: 'Area Conversion',
+                        description: 'Convert between square meters, hectares, acres, and more',
+                        icon: 'square',
+                        url: 'pages/area.html'
+                    },
+                    {
+                        title: 'Speed Conversion',
+                        description: 'Convert between km/h, mph, m/s, knots, and more',
+                        icon: 'speed',
+                        url: 'pages/speed.html'
+                    }
+                ]" :key="category.title">
+                    <div 
+                        x-show="!searchTerm || category.title.toLowerCase().includes(searchTerm.toLowerCase()) || category.description.toLowerCase().includes(searchTerm.toLowerCase())"
+                        class="bg-white rounded-lg shadow-md transition duration-300 hover:shadow-lg p-6"
+                    >
+                        <a :href="category.url" class="block h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                    <img :src="'assets/images/icons/' + category.icon + '.svg'" :alt="category.title + ' icon'" class="h-5 w-5">
+                                </div>
+                                <h3 class="ml-3 text-xl font-semibold" x-text="category.title"></h3>
+                            </div>
+                            <p class="text-gray-600" x-text="category.description"></p>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <section class="mt-16">
+            <h2 class="text-2xl font-bold mb-6 text-center">Popular Conversions</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="pages/volume.html#gallons-to-liters" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+                    <h3 class="font-medium">Gallons to Liters</h3>
+                    <p class="text-sm text-gray-600">Volume conversion</p>
+                </a>
+                <a href="pages/length.html#feet-to-meters" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+                    <h3 class="font-medium">Feet to Meters</h3>
+                    <p class="text-sm text-gray-600">Length conversion</p>
+                </a>
+                <a href="pages/weight.html#pounds-to-kilograms" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+                    <h3 class="font-medium">Pounds to Kilograms</h3>
+                    <p class="text-sm text-gray-600">Weight conversion</p>
+                </a>
+                <a href="pages/temperature.html#fahrenheit-to-celsius" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+                    <h3 class="font-medium">Fahrenheit to Celsius</h3>
+                    <p class="text-sm text-gray-600">Temperature conversion</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold mb-4">KonverterProff</h2>
+                    <p class="text-gray-300">Fast, accurate unit conversion</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Converters</h3>
+                        <ul class="space-y-2">
+                            <li><a href="pages/volume.html" class="text-gray-300 hover:text-white">Volume</a></li>
+                            <li><a href="pages/length.html" class="text-gray-300 hover:text-white">Length</a></li>
+                            <li><a href="pages/weight.html" class="text-gray-300 hover:text-white">Weight</a></li>
+                            <li><a href="pages/temperature.html" class="text-gray-300 hover:text-white">Temperature</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">More Units</h3>
+                        <ul class="space-y-2">
+                            <li><a href="pages/currency.html" class="text-gray-300 hover:text-white">Currency</a></li>
+                            <li><a href="pages/digital.html" class="text-gray-300 hover:text-white">Digital</a></li>
+                            <li><a href="pages/time.html" class="text-gray-300 hover:text-white">Time</a></li>
+                            <li><a href="pages/speed.html" class="text-gray-300 hover:text-white">Speed</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 KonverterProff. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

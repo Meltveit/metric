@@ -1,0 +1,13 @@
+# robots.txt for KonverterProff
+
+User-agent: *
+Allow: /
+
+# Allow all crawlers to access all content
+Sitemap: https://konverterproff.com/sitemap.xml
+
+# Disallow crawling of admin or development resources
+User-agent: *
+Disallow: /build/
+Disallow: /templates/
+Disallow: /admin/

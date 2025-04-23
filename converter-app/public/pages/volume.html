@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert volume units - liters, gallons, milliliters, cubic meters and more with KonverterProff">
+    <title>Volume Conversion | KonverterProff</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Volume Conversion | KonverterProff">
+    <meta name="description" content="Convert between liters, gallons, milliliters, cubic meters and more. Fast and accurate volume unit converter.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://konverterproff.com/pages/volume.html">
+    <meta property="og:title" content="Volume Conversion | KonverterProff">
+    <meta property="og:description" content="Convert between liters, gallons, milliliters, cubic meters and more. Fast and accurate volume unit converter.">
+    <meta property="og:image" content="../assets/images/konverterproff-social.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://konverterproff.com/pages/volume.html">
+    <meta property="twitter:title" content="Volume Conversion | KonverterProff">
+    <meta property="twitter:description" content="Convert between liters, gallons, milliliters, cubic meters and more. Fast and accurate volume unit converter.">
+    <meta property="twitter:image" content="../assets/images/konverterproff-social.jpg">
+    
+    <!-- Stylesheets -->
+    <link href="../css/styles.css" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CalculatorPage",
+      "name": "Volume Unit Converter",
+      "url": "https://konverterproff.com/pages/volume.html",
+      "description": "Convert between liters, gallons, milliliters, cubic meters and more. Fast and accurate volume unit converter."
+    }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="../index.html" class="flex items-center">
+                    <img src="../assets/images/logo.svg" alt="KonverterProff Logo" class="h-8 w-auto mr-3">
+                    <h1 class="text-xl font-bold">KonverterProff</h1>
+                </a>
+            </div>
+            <nav>
+                <button class="md:hidden p-2" aria-label="Menu" x-data="{open: false}" @click="open = !open">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="../index.html" class="hover:underline">Home</a></li>
+                    <li><a href="#" class="hover:underline">About</a></li>
+                    <li><a href="#" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-center">Volume Conversion</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto text-center">
+                Convert between different volume units including liters, gallons, milliliters, cubic meters, and more.
+            </p>
+        </section>
+
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6" x-data="volumeConverter()">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label for="fromValue" class="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                    <input 
+                        type="number" 
+                        id="fromValue" 
+                        x-model="fromValue" 
+                        @input="convert()" 
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Enter value"
+                    >
+                    <div class="mt-4">
+                        <label for="fromUnit" class="block text-sm font-medium text-gray-700 mb-1">From Unit</label>
+                        <select 
+                            id="fromUnit" 
+                            x-model="fromUnit" 
+                            @change="convert()" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            <option value="l">Liter (L)</option>
+                            <option value="ml">Milliliter (mL)</option>
+                            <option value="gal">US Gallon (gal)</option>
+                            <option value="qt">US Quart (qt)</option>
+                            <option value="pt">US Pint (pt)</option>
+                            <option value="cup">US Cup</option>
+                            <option value="oz">US Fluid Ounce (fl oz)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="tsp">Teaspoon (tsp)</option>
+                            <option value="m3">Cubic Meter (m³)</option>
+                            <option value="cm3">Cubic Centimeter (cm³)</option>
+                            <option value="mm3">Cubic Millimeter (mm³)</option>
+                            <option value="ft3">Cubic Foot (ft³)</option>
+                            <option value="in3">Cubic Inch (in³)</option>
+                            <option value="gal_uk">UK Gallon (gal)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center">
+                        <label for="toValue" class="block text-sm font-medium text-gray-700 mb-1">Result</label>
+                        <button @click="swap()" class="text-blue-600 hover:text-blue-800" title="Swap units">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zm10-4a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <input 
+                        type="number" 
+                        id="toValue" 
+                        x-model="toValue" 
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+                        readonly
+                    >
+                    <div class="mt-4">
+                        <label for="toUnit" class="block text-sm font-medium text-gray-700 mb-1">To Unit</label>
+                        <select 
+                            id="toUnit" 
+                            x-model="toUnit" 
+                            @change="convert()" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            <option value="l">Liter (L)</option>
+                            <option value="ml">Milliliter (mL)</option>
+                            <option value="gal">US Gallon (gal)</option>
+                            <option value="qt">US Quart (qt)</option>
+                            <option value="pt">US Pint (pt)</option>
+                            <option value="cup">US Cup</option>
+                            <option value="oz">US Fluid Ounce (fl oz)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="tsp">Teaspoon (tsp)</option>
+                            <option value="m3">Cubic Meter (m³)</option>
+                            <option value="cm3">Cubic Centimeter (cm³)</option>
+                            <option value="mm3">Cubic Millimeter (mm³)</option>
+                            <option value="ft3">Cubic Foot (ft³)</option>
+                            <option value="in3">Cubic Inch (in³)</option>
+                            <option value="gal_uk">UK Gallon (gal)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold mb-4">Common Volume Conversions</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <button @click="presetConversion('gal', 'l', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 US Gallon = <span x-text="formatNumber(convertValue(1, 'gal', 'l'))"></span> Liters</span>
+                    </button>
+                    <button @click="presetConversion('l', 'ml', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 Liter = <span x-text="formatNumber(convertValue(1, 'l', 'ml'))"></span> Milliliters</span>
+                    </button>
+                    <button @click="presetConversion('cup', 'ml', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 Cup = <span x-text="formatNumber(convertValue(1, 'cup', 'ml'))"></span> Milliliters</span>
+                    </button>
+                    <button @click="presetConversion('l', 'gal_uk', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 Liter = <span x-text="formatNumber(convertValue(1, 'l', 'gal_uk'))"></span> UK Gallons</span>
+                    </button>
+                    <button @click="presetConversion('oz', 'ml', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 Fluid Ounce = <span x-text="formatNumber(convertValue(1, 'oz', 'ml'))"></span> Milliliters</span>
+                    </button>
+                    <button @click="presetConversion('m3', 'l', 1)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">1 Cubic Meter = <span x-text="formatNumber(convertValue(1, 'm3', 'l'))"></span> Liters</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                <h3 class="text-lg font-semibold mb-2">Formula</h3>
+                <p class="text-gray-700" x-text="conversionFormula"></p>
+            </div>
+        </section>
+        
+        <section class="mt-12 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6">About Volume Units</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <p class="mb-4">
+                    Volume is the quantity of three-dimensional space enclosed by a closed surface. 
+                    For example, the space that a substance (solid, liquid, gas, or plasma) or shape occupies or contains.
+                </p>
+                <p class="mb-4">
+                    Common volume units include liters, gallons, cubic meters, and fluid ounces. 
+                    Different regions often use different standard units, with the metric system (liters, milliliters) 
+                    being widely used internationally, while the United States commonly uses customary units like gallons and fluid ounces.
+                </p>
+                <h3 class="text-xl font-semibold mt-6 mb-3">Unit Definitions</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Liter (L):</strong> The volume of 1 kilogram of water at 4°C. Equal to 1 cubic decimeter.</li>
+                    <li><strong>US Gallon (gal):</strong> Equal to 3.785411784 liters or 231 cubic inches.</li>
+                    <li><strong>UK Gallon (gal):</strong> Equal to 4.54609 liters, larger than the US gallon.</li>
+                    <li><strong>Cubic Meter (m³):</strong> The SI unit of volume, equal to 1000 liters.</li>
+                    <li><strong>Milliliter (mL):</strong> Equal to one-thousandth of a liter (0.001 L).</li>
+                    <li><strong>Fluid Ounce (fl oz):</strong> In the US system, one fluid ounce equals approximately 29.5735 milliliters.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold mb-4">KonverterProff</h2>
+                    <p class="text-gray-300">Fast, accurate unit conversion</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Converters</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../pages/volume.html" class="text-gray-300 hover:text-white">Volume</a></li>
+                            <li><a href="../pages/length.html" class="text-gray-300 hover:text-white">Length</a></li>
+                            <li><a href="../pages/weight.html" class="text-gray-300 hover:text-white">Weight</a></li>
+                            <li><a href="../pages/temperature.html" class="text-gray-300 hover:text-white">Temperature</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">More Units</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../pages/currency.html" class="text-gray-300 hover:text-white">Currency</a></li>
+                            <li><a href="../pages/digital.html" class="text-gray-300 hover:text-white">Digital</a></li>
+                            <li><a href="../pages/time.html" class="text-gray-300 hover:text-white">Time</a></li>
+                            <li><a href="../pages/speed.html" class="text-gray-300 hover:text-white">Speed</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 KonverterProff. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/converters/volume.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        function volumeConverter() {
+            return {
+                fromValue: 1,
+                toValue: 0,
+                fromUnit: 'l',
+                toUnit: 'gal',
+                conversionFormula: '1 Liter = 0.264172 US Gallons',
+                
+                // Initialize with default conversion
+                init() {
+                    this.convert();
+                },
+                
+                // Convert from one unit to another
+                convert() {
+                    if (this.fromValue === '' || isNaN(this.fromValue)) {
+                        this.toValue = '';
+                        return;
+                    }
+                    
+                    this.toValue = this.convertValue(this.fromValue, this.fromUnit, this.toUnit);
+                    this.updateFormula();
+                },
+                
+                // Conversion calculation
+                convertValue(value, fromUnit, toUnit) {
+                    // Convert to liters as base unit
+                    let valueInLiters = this.convertToLiters(value, fromUnit);
+                    
+                    // Convert from liters to target unit
+                    return this.convertFromLiters(valueInLiters, toUnit);
+                },
+                
+                // Convert any unit to liters
+                convertToLiters(value, unit) {
+                    switch(unit) {
+                        case 'l': return value;
+                        case 'ml': return value / 1000;
+                        case 'gal': return value * 3.78541;
+                        case 'qt': return value * 0.946353;
+                        case 'pt': return value * 0.473176;
+                        case 'cup': return value * 0.236588;
+                        case 'oz': return value * 0.0295735;
+                        case 'tbsp': return value * 0.0147868;
+                        case 'tsp': return value * 0.00492892;
+                        case 'm3': return value * 1000;
+                        case 'cm3': return value / 1000;
+                        case 'mm3': return value / 1000000;
+                        case 'ft3': return value * 28.3168;
+                        case 'in3': return value * 0.0163871;
+                        case 'gal_uk': return value * 4.54609;
+                        default: return value;
+                    }
+                },
+                
+                // Convert liters to any unit
+                convertFromLiters(liters, unit) {
+                    switch(unit) {
+                        case 'l': return liters;
+                        case 'ml': return liters * 1000;
+                        case 'gal': return liters / 3.78541;
+                        case 'qt': return liters / 0.946353;
+                        case 'pt': return liters / 0.473176;
+                        case 'cup': return liters / 0.236588;
+                        case 'oz': return liters / 0.0295735;
+                        case 'tbsp': return liters / 0.0147868;
+                        case 'tsp': return liters / 0.00492892;
+                        case 'm3': return liters / 1000;
+                        case 'cm3': return liters * 1000;
+                        case 'mm3': return liters * 1000000;
+                        case 'ft3': return liters / 28.3168;
+                        case 'in3': return liters / 0.0163871;
+                        case 'gal_uk': return liters / 4.54609;
+                        default: return liters;
+                    }
+                },
+                
+                // Get unit display name
+                getUnitName(unit) {
+                    switch(unit) {
+                        case 'l': return 'Liter';
+                        case 'ml': return 'Milliliter';
+                        case 'gal': return 'US Gallon';
+                        case 'qt': return 'US Quart';
+                        case 'pt': return 'US Pint';
+                        case 'cup': return 'Cup';
+                        case 'oz': return 'Fluid Ounce';
+                        case 'tbsp': return 'Tablespoon';
+                        case 'tsp': return 'Teaspoon';
+                        case 'm3': return 'Cubic Meter';
+                        case 'cm3': return 'Cubic Centimeter';
+                        case 'mm3': return 'Cubic Millimeter';
+                        case 'ft3': return 'Cubic Foot';
+                        case 'in3': return 'Cubic Inch';
+                        case 'gal_uk': return 'UK Gallon';
+                        default: return unit;
+                    }
+                },
+                
+                // Update the formula displayed
+                updateFormula() {
+                    const fromUnitName = this.getUnitName(this.fromUnit);
+                    const toUnitName = this.getUnitName(this.toUnit);
+                    const conversionFactor = this.convertValue(1, this.fromUnit, this.toUnit);
+                    
+                    this.conversionFormula = `1 ${fromUnitName} = ${this.formatNumber(conversionFactor)} ${toUnitName}`;
+                },
+                
+                // Format number for display
+                formatNumber(number) {
+                    // Determine the appropriate number of decimal places based on the value's magnitude
+                    let decimals = 6;
+                    if (number >= 100) decimals = 2;
+                    else if (number >= 10) decimals = 3;
+                    else if (number >= 1) decimals = 4;
+                    else if (number >= 0.1) decimals = 5;
+                    
+                    // Remove trailing zeros after the decimal point
+                    return parseFloat(number.toFixed(decimals)).toString();
+                },
+                
+                // Swap from and to units
+                swap() {
+                    [this.fromUnit, this.toUnit] = [this.toUnit, this.fromUnit];
+                    this.convert();
+                },
+                
+                // Set conversion from a preset
+                presetConversion(fromUnit, toUnit, value) {
+                    this.fromUnit = fromUnit;
+                    this.toUnit = toUnit;
+                    this.fromValue = value;
+                    this.convert();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

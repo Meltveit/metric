@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://konverterproff.com/</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Core Converter Pages -->
+  <url>
+    <loc>https://konverterproff.com/pages/volume.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/length.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/weight.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/temperature.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Additional Converter Pages -->
+  <url>
+    <loc>https://konverterproff.com/pages/currency.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/digital.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/time.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/area.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/speed.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Common Conversion Pages -->
+  <url>
+    <loc>https://konverterproff.com/pages/volume.html#gallons-to-liters</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/length.html#feet-to-meters</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/weight.html#pounds-to-kilograms</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/pages/temperature.html#fahrenheit-to-celsius</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Other Pages -->
+  <url>
+    <loc>https://konverterproff.com/about.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/contact.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/privacy-policy.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://konverterproff.com/terms-of-use.html</loc>
+    <lastmod>2025-04-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>

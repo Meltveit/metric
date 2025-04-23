@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert temperature units - Celsius, Fahrenheit, Kelvin and more with KonverterProff">
+    <title>Temperature Conversion | KonverterProff</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Temperature Conversion | KonverterProff">
+    <meta name="description" content="Convert between Celsius, Fahrenheit, Kelvin and more. Fast and accurate temperature unit converter.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://konverterproff.com/pages/temperature.html">
+    <meta property="og:title" content="Temperature Conversion | KonverterProff">
+    <meta property="og:description" content="Convert between Celsius, Fahrenheit, Kelvin and more. Fast and accurate temperature unit converter.">
+    <meta property="og:image" content="../assets/images/konverterproff-social.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://konverterproff.com/pages/temperature.html">
+    <meta property="twitter:title" content="Temperature Conversion | KonverterProff">
+    <meta property="twitter:description" content="Convert between Celsius, Fahrenheit, Kelvin and more. Fast and accurate temperature unit converter.">
+    <meta property="twitter:image" content="../assets/images/konverterproff-social.jpg">
+    
+    <!-- Stylesheets -->
+    <link href="../css/styles.css" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CalculatorPage",
+      "name": "Temperature Unit Converter",
+      "url": "https://konverterproff.com/pages/temperature.html",
+      "description": "Convert between Celsius, Fahrenheit, Kelvin and more. Fast and accurate temperature unit converter."
+    }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="../index.html" class="flex items-center">
+                    <img src="../assets/images/logo.svg" alt="KonverterProff Logo" class="h-8 w-auto mr-3">
+                    <h1 class="text-xl font-bold">KonverterProff</h1>
+                </a>
+            </div>
+            <nav>
+                <button class="md:hidden p-2" aria-label="Menu" x-data="{open: false}" @click="open = !open">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="../index.html" class="hover:underline">Home</a></li>
+                    <li><a href="#" class="hover:underline">About</a></li>
+                    <li><a href="#" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-center">Temperature Conversion</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto text-center">
+                Convert between different temperature units including Celsius, Fahrenheit, Kelvin, and more.
+            </p>
+        </section>
+
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6" x-data="temperatureConverter()">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label for="fromValue" class="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                    <input 
+                        type="number" 
+                        id="fromValue" 
+                        x-model="fromValue" 
+                        @input="convert()" 
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Enter value"
+                    >
+                    <div class="mt-4">
+                        <label for="fromUnit" class="block text-sm font-medium text-gray-700 mb-1">From Unit</label>
+                        <select 
+                            id="fromUnit" 
+                            x-model="fromUnit" 
+                            @change="convert()" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            <option value="c">Celsius (°C)</option>
+                            <option value="f">Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                            <option value="r">Rankine (°R)</option>
+                            <option value="re">Réaumur (°Ré)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center">
+                        <label for="toValue" class="block text-sm font-medium text-gray-700 mb-1">Result</label>
+                        <button @click="swap()" class="text-blue-600 hover:text-blue-800" title="Swap units">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zm10-4a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <input 
+                        type="number" 
+                        id="toValue" 
+                        x-model="toValue" 
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+                        readonly
+                    >
+                    <div class="mt-4">
+                        <label for="toUnit" class="block text-sm font-medium text-gray-700 mb-1">To Unit</label>
+                        <select 
+                            id="toUnit" 
+                            x-model="toUnit" 
+                            @change="convert()" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            <option value="c">Celsius (°C)</option>
+                            <option value="f">Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                            <option value="r">Rankine (°R)</option>
+                            <option value="re">Réaumur (°Ré)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold mb-4">Common Temperature Points</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <button @click="presetConversion('c', 'f', 0)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">Freezing point of water (0°C) = <span x-text="formatNumber(convertValue(0, 'c', 'f'))"></span>°F</span>
+                    </button>
+                    <button @click="presetConversion('c', 'f', 100)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">Boiling point of water (100°C) = <span x-text="formatNumber(convertValue(100, 'c', 'f'))"></span>°F</span>
+                    </button>
+                    <button @click="presetConversion('f', 'c', 98.6)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">Human body temperature (98.6°F) = <span x-text="formatNumber(convertValue(98.6, 'f', 'c'))"></span>°C</span>
+                    </button>
+                    <button @click="presetConversion('c', 'k', 0)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">0°C = <span x-text="formatNumber(convertValue(0, 'c', 'k'))"></span> K</span>
+                    </button>
+                    <button @click="presetConversion('k', 'c', 0)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">Absolute zero (0 K) = <span x-text="formatNumber(convertValue(0, 'k', 'c'))"></span>°C</span>
+                    </button>
+                    <button @click="presetConversion('f', 'k', 32)" class="text-left p-3 rounded border border-gray-200 hover:bg-gray-50">
+                        <span class="block font-medium">Freezing point (32°F) = <span x-text="formatNumber(convertValue(32, 'f', 'k'))"></span> K</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                <h3 class="text-lg font-semibold mb-2">Formula</h3>
+                <p class="text-gray-700" x-text="conversionFormula"></p>
+            </div>
+        </section>
+        
+        <section class="mt-12 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6">About Temperature Units</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <p class="mb-4">
+                    Temperature is a physical quantity that expresses hot and cold. It is fundamentally linked to the kinetic energy of the particles which make up matter.
+                </p>
+                <p class="mb-4">
+                    Different temperature scales are used in different regions of the world. The Celsius scale is used in most countries, 
+                    while the Fahrenheit scale is primarily used in the United States. The Kelvin scale is the SI base unit and is used in scientific contexts.
+                </p>
+                <h3 class="text-xl font-semibold mt-6 mb-3">Temperature Scales</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Celsius (°C):</strong> A scale where 0°C is the freezing point of water and 100°C is the boiling point of water at standard atmospheric pressure.</li>
+                    <li><strong>Fahrenheit (°F):</strong> A scale where 32°F is the freezing point of water and 212°F is the boiling point of water at standard atmospheric pressure.</li>
+                    <li><strong>Kelvin (K):</strong> The SI base unit of temperature. 0 K is absolute zero, the theoretical absence of all thermal energy. There are no negative temperatures in the Kelvin scale.</li>
+                    <li><strong>Rankine (°R):</strong> An absolute temperature scale using Fahrenheit degrees, where 0°R is absolute zero.</li>
+                    <li><strong>Réaumur (°Ré):</strong> A temperature scale where 0°Ré is the freezing point of water and 80°Ré is the boiling point of water.</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3">Conversion Formulas</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Celsius to Fahrenheit:</strong> °F = (°C × 9/5) + 32</li>
+                    <li><strong>Fahrenheit to Celsius:</strong> °C = (°F - 32) × 5/9</li>
+                    <li><strong>Celsius to Kelvin:</strong> K = °C + 273.15</li>
+                    <li><strong>Kelvin to Celsius:</strong> °C = K - 273.15</li>
+                    <li><strong>Fahrenheit to Kelvin:</strong> K = (°F - 32) × 5/9 + 273.15</li>
+                    <li><strong>Kelvin to Fahrenheit:</strong> °F = (K - 273.15) × 9/5 + 32</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold mb-4">KonverterProff</h2>
+                    <p class="text-gray-300">Fast, accurate unit conversion</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Converters</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../pages/volume.html" class="text-gray-300 hover:text-white">Volume</a></li>
+                            <li><a href="../pages/length.html" class="text-gray-300 hover:text-white">Length</a></li>
+                            <li><a href="../pages/weight.html" class="text-gray-300 hover:text-white">Weight</a></li>
+                            <li><a href="../pages/temperature.html" class="text-gray-300 hover:text-white">Temperature</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">More Units</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../pages/currency.html" class="text-gray-300 hover:text-white">Currency</a></li>
+                            <li><a href="../pages/digital.html" class="text-gray-300 hover:text-white">Digital</a></li>
+                            <li><a href="../pages/time.html" class="text-gray-300 hover:text-white">Time</a></li>
+                            <li><a href="../pages/speed.html" class="text-gray-300 hover:text-white">Speed</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 KonverterProff. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/converters/temperature.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        function temperatureConverter() {
+            return {
+                fromValue: 0,
+                toValue: 32,
+                fromUnit: 'c',
+                toUnit: 'f',
+                conversionFormula: '°F = (°C × 9/5) + 32',
+                
+                // Initialize with default conversion
+                init() {
+                    this.convert();
+                },
+                
+                // Convert from one unit to another
+                convert() {
+                    if (this.fromValue === '' || isNaN(this.fromValue)) {
+                        this.toValue = '';
+                        return;
+                    }
+                    
+                    this.toValue = this.convertValue(this.fromValue, this.fromUnit, this.toUnit);
+                    this.updateFormula();
+                },
+                
+                // Conversion calculation
+                convertValue(value, fromUnit, toUnit) {
+                    // First convert to Celsius as intermediate step
+                    let celsius;
+                    
+                    switch(fromUnit) {
+                        case 'c': celsius = parseFloat(value); break;
+                        case 'f': celsius = (parseFloat(value) - 32) * 5/9; break;
+                        case 'k': celsius = parseFloat(value) - 273.15; break;
+                        case 'r': celsius = (parseFloat(value) - 491.67) * 5/9; break;
+                        case 're': celsius = parseFloat(value) * 5/4; break;
+                        default: celsius = parseFloat(value);
+                    }
+                    
+                    // Then convert from Celsius to target unit
+                    switch(toUnit) {
+                        case 'c': return celsius;
+                        case 'f': return celsius * 9/5 + 32;
+                        case 'k': return celsius + 273.15;
+                        case 'r': return (celsius + 273.15) * 9/5;
+                        case 're': return celsius * 4/5;
+                        default: return celsius;
+                    }
+                },
+                
+                // Get unit display name
+                getUnitName(unit) {
+                    switch(unit) {
+                        case 'c': return 'Celsius';
+                        case 'f': return 'Fahrenheit';
+                        case 'k': return 'Kelvin';
+                        case 'r': return 'Rankine';
+                        case 're': return 'Réaumur';
+                        default: return unit;
+                    }
+                },
+                
+                // Get unit symbol
+                getUnitSymbol(unit) {
+                    switch(unit) {
+                        case 'c': return '°C';
+                        case 'f': return '°F';
+                        case 'k': return 'K';
+                        case 'r': return '°R';
+                        case 're': return '°Ré';
+                        default: return unit;
+                    }
+                },
+                
+                // Update the formula displayed
+                updateFormula() {
+                    const fromUnitName = this.getUnitName(this.fromUnit);
+                    const toUnitName = this.getUnitName(this.toUnit);
+                    const fromSymbol = this.getUnitSymbol(this.fromUnit);
+                    const toSymbol = this.getUnitSymbol(this.toUnit);
+                    
+                    // Generate specific formula based on unit conversion
+                    if (this.fromUnit === 'c' && this.toUnit === 'f') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} × 9/5) + 32`;
+                    } else if (this.fromUnit === 'f' && this.toUnit === 'c') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} - 32) × 5/9`;
+                    } else if (this.fromUnit === 'c' && this.toUnit === 'k') {
+                        this.conversionFormula = `${toSymbol} = ${fromSymbol} + 273.15`;
+                    } else if (this.fromUnit === 'k' && this.toUnit === 'c') {
+                        this.conversionFormula = `${toSymbol} = ${fromSymbol} - 273.15`;
+                    } else if (this.fromUnit === 'f' && this.toUnit === 'k') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} - 32) × 5/9 + 273.15`;
+                    } else if (this.fromUnit === 'k' && this.toUnit === 'f') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} - 273.15) × 9/5 + 32`;
+                    } else if (this.fromUnit === 'c' && this.toUnit === 're') {
+                        this.conversionFormula = `${toSymbol} = ${fromSymbol} × 4/5`;
+                    } else if (this.fromUnit === 're' && this.toUnit === 'c') {
+                        this.conversionFormula = `${toSymbol} = ${fromSymbol} × 5/4`;
+                    } else if (this.fromUnit === 'c' && this.toUnit === 'r') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} + 273.15) × 9/5`;
+                    } else if (this.fromUnit === 'r' && this.toUnit === 'c') {
+                        this.conversionFormula = `${toSymbol} = (${fromSymbol} - 491.67) × 5/9`;
+                    } else {
+                        // For other combinations, show the general conversion path through Celsius
+                        this.conversionFormula = `To convert from ${fromUnitName} to ${toUnitName}, we convert first to Celsius, then to ${toUnitName}`;
+                    }
+                },
+                
+                // Format number for display
+                formatNumber(number) {
+                    // Determine the appropriate number of decimal places based on the value's magnitude
+                    let decimals = 3;
+                    if (Number.isInteger(number)) {
+                        return number.toString();
+                    }
+                    
+                    // Remove trailing zeros after the decimal point
+                    return parseFloat(number.toFixed(decimals)).toString();
+                },
+                
+                // Swap from and to units
+                swap() {
+                    [this.fromUnit, this.toUnit] = [this.toUnit, this.fromUnit];
+                    this.convert();
+                },
+                
+                // Set conversion from a preset
+                presetConversion(fromUnit, toUnit, value) {
+                    this.fromUnit = fromUnit;
+                    this.toUnit = toUnit;
+                    this.fromValue = value;
+                    this.convert();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
