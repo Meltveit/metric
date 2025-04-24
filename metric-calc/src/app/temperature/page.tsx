@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import TemperatureConverter from '@/components/calculators/TemperatureConverter';
+// Fix: Import from the correct path where the component actually exists
+import TemperatureConverter from '@/lib/constants/TemperatureConverter';
 import InfoBox from '@/components/calculators/InfoBox';
 import { Thermometer } from 'lucide-react';
 

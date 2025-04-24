@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Calculate } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Calculator } from 'lucide-react';
 import { densityUnits, commonMaterials, calculateDensity, calculateMass, calculateVolume } from '@/lib/constants/densityUnits';
 import { ConversionUnit } from '@/types/units';
 import { formatNumber } from '@/lib/utils';
@@ -24,12 +24,11 @@ export default function DensityCalculator() {
   // State for the calculation mode
   const [mode, setMode] = useState<CalculationMode>('density');
   
-  // State for the result
-  const [result, setResult] = useState<string>('');
+  // State for the formula
   const [formula, setFormula] = useState<string>('');
   
-  // Calculate based on the mode
-  const calculate = () => {
+  // Calculate based on the mode - wrapped in useCallback
+  const calculate = useCallback(() => {
     let calculatedValue = 0;
     
     if (mode === 'density') {
@@ -54,12 +53,10 @@ export default function DensityCalculator() {
         setFormula(`Volume = Mass / Density = ${mass} ${massUnit} / ${density} ${densityUnit.symbol} = ${formatNumber(calculatedValue)} ${volumeUnit}`);
       }
     }
-    
-    setResult(formatNumber(calculatedValue));
-  };
+  }, [mode, density, mass, volume, densityUnit, massUnit, volumeUnit]); // Include all dependencies
   
   // Handle material selection
-  const selectMaterial = (materialDensity: number, unit: string) => {
+  const selectMaterial = useCallback((materialDensity: number, unit: string) => {
     // Find the unit in the array
     const selectedUnit = allDensityUnits.find(u => u.code === unit);
     if (selectedUnit) {
@@ -77,12 +74,12 @@ export default function DensityCalculator() {
         setFormula(`Volume = Mass / Density = ${mass} ${massUnit} / ${materialDensity} ${selectedUnit.symbol} = ${formatNumber(newVolume)} ${volumeUnit}`);
       }
     }
-  };
+  }, [mode, mass, volume, volumeUnit, massUnit]);
   
   // Calculate when inputs change
   useEffect(() => {
     calculate();
-  }, [mode, density, mass, volume, densityUnit, massUnit, volumeUnit]);
+  }, [calculate]); // Using memoized calculate function
   
   return (
     <div>
@@ -236,7 +233,7 @@ export default function DensityCalculator() {
               className="text-left p-3 rounded border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               <div className="flex items-center">
-                <Calculate className="text-primary mr-2 h-5 w-5" />
+                <Calculator className="text-primary mr-2 h-5 w-5" />
                 <div>
                   <span className="block font-medium">{material.name}</span>
                   <span className="block text-sm text-gray-600 dark:text-gray-400">

@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Beaker, Trash2 } from 'lucide-react';
 import { formatNumber } from '@/lib/utils';
 
 type RatioType = 'parts' | 'percentage';
-type CalculationType = 'ingredient' | 'total';
 
 interface Ingredient {
   id: string;
@@ -20,9 +19,8 @@ export default function MixtureCalculator() {
     { id: '2', name: 'Ingredient 2', value: 2 },
   ]);
   
-  // State for ratio type and calculation type
+  // State for ratio type
   const [ratioType, setRatioType] = useState<RatioType>('parts');
-  const [calcType, setCalcType] = useState<CalculationType>('total');
   
   // State for total and results
   const [total, setTotal] = useState<number>(3); // Initial sum of parts
@@ -60,8 +58,8 @@ export default function MixtureCalculator() {
     ));
   };
   
-  // Calculate the mixture
-  const calculateMixture = () => {
+  // Calculate the mixture - wrapped in useCallback
+  const calculateMixture = useCallback(() => {
     // Calculate the total parts/percentage
     const sum = ingredients.reduce((acc, ing) => acc + ing.value, 0);
     setTotal(sum);
@@ -90,12 +88,12 @@ export default function MixtureCalculator() {
       
       setResults(calculatedResults);
     }
-  };
+  }, [ingredients, ratioType, targetTotal]); // Include all dependencies
   
   // Calculate when inputs change
   useEffect(() => {
     calculateMixture();
-  }, [ingredients, ratioType, targetTotal]);
+  }, [calculateMixture]); // Using memoized calculateMixture function
   
   // Normalize percentages to 100% if percentage mode is selected
   const normalizeToCents = () => {

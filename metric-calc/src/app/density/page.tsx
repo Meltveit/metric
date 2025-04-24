@@ -4,7 +4,7 @@ import UnitConverter from '@/components/calculators/UnitConverter';
 import InfoBox from '@/components/calculators/InfoBox';
 import { densityUnits } from '@/lib/constants/densityUnits';
 import { BarChart4, Weight } from 'lucide-react';
-import { getDensitySeoData } from '@/lib/constants/seoData';
+// Import removed since it's not being used
 
 export const metadata: Metadata = {
   title: 'Density Calculator and Converter | MetricCalc',
@@ -149,7 +149,7 @@ export default function DensityPage() {
             </div>
             
             <div>
-              <h3 className="font-semibold">What's the difference between mass, weight, and density?</h3>
+              <h3 className="font-semibold">What&apos;s the difference between mass, weight, and density?</h3>
               <p className="text-gray-700 dark:text-gray-300">
                 Mass is the amount of matter in an object. Weight is the force of gravity on an object. 
                 Density is mass per unit volume (how tightly packed the matter is). Mass and density remain constant regardless 

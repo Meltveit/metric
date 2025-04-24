@@ -6,7 +6,7 @@ export interface MetaTagsProps {
   keywords: string[];
   canonicalUrl: string;
   ogImage?: string;
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, unknown>; // Fixed: Changed 'any' to 'unknown'
 }
 
 export function generateMetadata({ 
@@ -64,7 +64,7 @@ export function generateConverterStructuredData(
   name: string,
   description: string,
   url: string
-): Record<string, any> {
+): Record<string, unknown> { // Fixed: Changed 'any' to 'unknown'
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -84,7 +84,7 @@ export function generateConverterStructuredData(
 // Helper function to generate FAQ structured data
 export function generateFaqStructuredData(
   faqs: { question: string; answer: string }[]
-): Record<string, any> {
+): Record<string, unknown> { // Fixed: Changed 'any' to 'unknown'
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -102,7 +102,7 @@ export function generateFaqStructuredData(
 // Helper function to generate breadcrumb structured data
 export function generateBreadcrumbStructuredData(
   items: { name: string; url: string }[]
-): Record<string, any> {
+): Record<string, unknown> { // Fixed: Changed 'any' to 'unknown'
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

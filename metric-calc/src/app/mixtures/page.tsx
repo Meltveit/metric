@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import MixtureCalculator from '@/components/calculators/MixtureCalculator';
 import InfoBox from '@/components/calculators/InfoBox';
-import { Mix, Ratio, Beaker } from 'lucide-react';
-import { getMixturesSeoData } from '@/lib/constants/seoData';
+import { Ratio, Beaker } from 'lucide-react';
+// Removed unused imports: Mix (which doesn't exist) and getMixturesSeoData
 
 export const metadata: Metadata = {
   title: 'Mixture Ratio Calculator | MetricCalc',
@@ -69,9 +69,9 @@ export default function MixturesPage() {
             </p>
             <ul>
               <li><strong>Simple ratio notation:</strong> Such as 1:2:3, where the numbers represent the relative quantities of each component.</li>
-              <li><strong>Parts by volume or weight:</strong> For example, "1 part cement to 3 parts sand" in construction.</li>
+              <li><strong>Parts by volume or weight:</strong> For example, &quot;1 part cement to 3 parts sand&quot; in construction.</li>
               <li><strong>Percentages:</strong> Where each component is expressed as a percent of the total (and all percentages sum to 100%).</li>
-              <li><strong>Fractions:</strong> Such as "½ cup sugar to 2 cups flour" in cooking.</li>
+              <li><strong>Fractions:</strong> Such as &quot;½ cup sugar to 2 cups flour&quot; in cooking.</li>
             </ul>
             
             <h3>How to Use Mixture Ratios</h3>
@@ -126,7 +126,7 @@ export default function MixturesPage() {
           
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold">What's the difference between ratio and proportion?</h3>
+              <h3 className="font-semibold">What&apos;s the difference between ratio and proportion?</h3>
               <p className="text-gray-700 dark:text-gray-300">
                 A ratio compares quantities of the same kind, showing their relative sizes (e.g., 1:2). 
                 A proportion is an equation stating that two ratios are equal, such as 1:2 = 2:4.

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import UnitConverter from '@/components/calculators/UnitConverter';
 import InfoBox from '@/components/calculators/InfoBox';
-import { lengthAreaUnits, commonLengthAreaConversions } from '@/lib/constants/lengthAreaUnits';
+import { lengthAreaUnits } from '@/lib/constants/lengthAreaUnits';
 import { Ruler, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {

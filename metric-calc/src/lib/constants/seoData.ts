@@ -1,5 +1,6 @@
 import { MetaTagsProps } from '@/components/layout/MetaTags';
-import { generateConverterStructuredData, generateFaqStructuredData } from '@/components/layout/MetaTags';
+import { generateConverterStructuredData } from '@/components/layout/MetaTags';
+// Removed unused import: generateFaqStructuredData
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://metriccalc.com';
 

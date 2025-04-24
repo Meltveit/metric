@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ArrowRightLeft, Thermometer } from 'lucide-react';
 import { temperatureUnits, getTemperatureFormula } from '@/lib/constants/temperatureUnits';
 import { formatNumber } from '@/lib/utils';
@@ -13,8 +13,8 @@ export default function TemperatureConverter() {
   const [toValue, setToValue] = useState<string>('');
   const [formula, setFormula] = useState<string>('');
 
-  // Convert temperature
-  const convert = () => {
+  // Convert temperature - wrapped in useCallback
+  const convert = useCallback(() => {
     if (fromValue === '' || isNaN(Number(fromValue))) {
       setToValue('');
       setFormula('');
@@ -31,10 +31,10 @@ export default function TemperatureConverter() {
     
     // Update formula
     setFormula(getTemperatureFormula(fromUnit.code, toUnit.code));
-  };
+  }, [fromValue, fromUnit, toUnit]);
 
   // Swap from and to units
-  const swapUnits = () => {
+  const swapUnits = useCallback(() => {
     const oldFromUnit = fromUnit;
     setFromUnit(toUnit);
     setToUnit(oldFromUnit);
@@ -43,10 +43,10 @@ export default function TemperatureConverter() {
     if (toValue !== '' && !isNaN(Number(toValue))) {
       setFromValue(toValue);
     }
-  };
+  }, [fromUnit, toUnit, toValue]);
 
   // Set a preset temperature conversion
-  const setPresetConversion = (fromUnitCode: string, toUnitCode: string, value: number) => {
+  const setPresetConversion = useCallback((fromUnitCode: string, toUnitCode: string, value: number) => {
     const newFromUnit = temperatureUnits.find(u => u.code === fromUnitCode);
     const newToUnit = temperatureUnits.find(u => u.code === toUnitCode);
     
@@ -55,12 +55,12 @@ export default function TemperatureConverter() {
       setToUnit(newToUnit);
       setFromValue(value.toString());
     }
-  };
+  }, []);
 
   // Run conversion when inputs change
   useEffect(() => {
     convert();
-  }, [fromValue, fromUnit, toUnit]);
+  }, [convert]); // Using memoized convert function
 
   return (
     <div>

@@ -21,6 +21,15 @@ export function useUnitConversion({
   const [toValue, setToValue] = useState<string>('');
   const [formula, setFormula] = useState<string>('');
 
+  // Update the formula displayed - removed unused parameters
+  const updateFormula = useCallback(() => {
+    const conversionFactor = toUnit.fromBase(fromUnit.toBase(1));
+    
+    const formattedFactor = formatNumber(conversionFactor);
+    
+    setFormula(`1 ${fromUnit.name} = ${formattedFactor} ${toUnit.name}`);
+  }, [fromUnit, toUnit]);
+
   // Convert from one unit to another
   const convert = useCallback(() => {
     if (fromValue === '' || isNaN(Number(fromValue))) {
@@ -41,18 +50,9 @@ export function useUnitConversion({
     // Update the result value
     setToValue(formatNumber(result));
 
-    // Update formula
-    updateFormula(value, result);
-  }, [fromValue, fromUnit, toUnit]);
-
-  // Update the formula displayed
-  const updateFormula = useCallback((value: number, result: number) => {
-    const conversionFactor = toUnit.fromBase(fromUnit.toBase(1));
-    
-    const formattedFactor = formatNumber(conversionFactor);
-    
-    setFormula(`1 ${fromUnit.name} = ${formattedFactor} ${toUnit.name}`);
-  }, [fromUnit, toUnit]);
+    // Update formula - no parameters needed
+    updateFormula();
+  }, [fromValue, fromUnit, toUnit, updateFormula]);
 
   // Swap from and to units
   const swapUnits = useCallback(() => {

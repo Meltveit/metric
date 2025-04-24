@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import UnitConverter from '@/components/calculators/UnitConverter';
 import InfoBox from '@/components/calculators/InfoBox';
-import { dataStorageUnits, commonDataConversions } from '@/lib/constants/dataStorageUnits';
+import { dataStorageUnits } from '@/lib/constants/dataStorageUnits';
 import { HardDrive, Database } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -110,9 +110,9 @@ export default function DataStoragePage() {
             
             <h3>The Confusion Between Units</h3>
             <p>
-              The discrepancy between decimal and binary units can cause confusion. For example, a "500 GB" hard drive 
+              The discrepancy between decimal and binary units can cause confusion. For example, a &quot;500 GB&quot; hard drive 
               uses the decimal definition and contains 500,000,000,000 bytes. However, when connected to a computer, 
-              the operating system might report it as "465 GB" because it's actually measuring 465 GiB (binary units), 
+              the operating system might report it as &quot;465 GB&quot; because it&apos;s actually measuring 465 GiB (binary units), 
               but using GB as the label.
             </p>
             <p>
@@ -136,7 +136,7 @@ export default function DataStoragePage() {
             </div>
             
             <div>
-              <h3 className="font-semibold">What's the difference between MB and MiB?</h3>
+              <h3 className="font-semibold">What&apos;s the difference between MB and MiB?</h3>
               <p className="text-gray-700 dark:text-gray-300">
                 MB (megabyte) is a decimal unit equal to 1,000,000 bytes, while MiB (mebibyte) is a binary unit 
                 equal to 1,048,576 bytes. The difference between them is about 4.9%.

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import UnitConverter from '@/components/calculators/UnitConverter';
 import InfoBox from '@/components/calculators/InfoBox';
-import { volumeMassUnits, commonVolumeMassConversions } from '@/lib/constants/volumeMassUnits';
+import { volumeMassUnits } from '@/lib/constants/volumeMassUnits';
 import { Beaker, Scale } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -81,7 +81,7 @@ export default function VolumeMassPage() {
             
             <h3>Volume vs. Weight vs. Mass</h3>
             <p>
-              It's important to understand the difference between volume, weight, and mass:
+              It&apos;s important to understand the difference between volume, weight, and mass:
             </p>
             <ul>
               <li><strong>Volume</strong> measures the amount of space an object or substance occupies.</li>
@@ -115,7 +115,7 @@ export default function VolumeMassPage() {
             </div>
             
             <div>
-              <h3 className="font-semibold">What's the difference between mass and weight?</h3>
+              <h3 className="font-semibold">What&apos;s the difference between mass and weight?</h3>
               <p className="text-gray-700 dark:text-gray-300">
                 Mass is a measure of the amount of matter in an object, while weight is the force exerted on an object due to gravity.
                 Mass remains constant regardless of location, while weight changes with gravity.

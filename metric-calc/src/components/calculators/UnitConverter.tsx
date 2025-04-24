@@ -3,7 +3,8 @@
 import { useEffect } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
 import { useUnitConversion } from '@/hooks/useUnitConversion';
-import { ConversionUnit, UnitGroup } from '@/types/units';
+import { UnitGroup } from '@/types/units';
+// Removed unused import: ConversionUnit
 
 interface UnitConverterProps {
   unitGroups: UnitGroup[];
