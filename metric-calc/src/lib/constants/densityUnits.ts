@@ -1,10 +1,17 @@
-// Modified version of densityUnits.ts
-// This version uses string-based conversion functions that can be safely serialized
-
 import { UnitGroup } from '@/types/units';
 
-// Define conversion functions as strings that will be evaluated on the client side
-const conversionFunctions = {
+// Define serializable unit type without actual functions
+export interface SerializableUnit {
+  code: string;
+  name: string;
+  symbol: string;
+  // String-based conversion functions that can be serialized
+  toBaseStr: string;
+  fromBaseStr: string;
+}
+
+// Define conversion functions as strings that can be serialized
+const conversionFunctions: Record<string, { toBase: string; fromBase: string }> = {
   // Identity conversion
   identity: {
     toBase: 'value => value',
@@ -52,17 +59,28 @@ const conversionFunctions = {
   }
 };
 
-// Helper to create the unit with string-based conversion functions
-const createUnit = (code, name, symbol, conversionType) => ({
-  code,
-  name,
-  symbol,
-  toBaseStr: conversionFunctions[conversionType]?.toBase || conversionFunctions.identity.toBase,
-  fromBaseStr: conversionFunctions[conversionType]?.fromBase || conversionFunctions.identity.fromBase
-});
+// Helper to create serializable units
+const createUnit = (
+  code: string, 
+  name: string, 
+  symbol: string, 
+  conversionType: keyof typeof conversionFunctions
+): SerializableUnit => {
+  // Get conversion functions for this type
+  const conversion = conversionFunctions[conversionType] || conversionFunctions.identity;
+  
+  return {
+    code,
+    name,
+    symbol,
+    // Store string representations that can be serialized
+    toBaseStr: conversion.toBase,
+    fromBaseStr: conversion.fromBase
+  };
+};
 
-// Define density units using our new approach
-export const densityUnits: UnitGroup[] = [
+// Define density units using our serializable approach
+export const densityUnits: { name: string; units: SerializableUnit[] }[] = [
   {
     name: 'Density',
     units: [

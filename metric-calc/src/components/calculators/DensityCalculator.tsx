@@ -1,51 +1,36 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Calculator } from 'lucide-react';
-import { densityUnits, commonMaterials, calculateDensity, calculateMass, calculateVolume } from '@/lib/constants/densityUnits';
+import { densityUnits, commonMaterials, calculateDensity, calculateMass, calculateVolume, SerializableUnit } from '@/lib/constants/densityUnits';
 import { formatNumber } from '@/lib/utils';
 
-// Extended type to include string-based conversion functions
-interface ExtendedUnit {
-  code: string;
-  name: string;
-  symbol: string;
-  // String-based conversion functions
-  toBaseStr?: string;
-  fromBaseStr?: string;
-  // Regular conversion functions (for backward compatibility)
-  toBase?: (value: number) => number;
-  fromBase?: (value: number) => number;
+// Type for client-side unit with executable functions
+interface ClientUnit extends SerializableUnit {
+  toBase: (value: number) => number;
+  fromBase: (value: number) => number;
 }
 
 type CalculationMode = 'density' | 'mass' | 'volume';
 
-// Helper function to convert using string-based or regular function
-const convertValue = (value: number, unit: ExtendedUnit, direction: 'toBase' | 'fromBase'): number => {
-  // If the unit has a regular function, use it
-  if (unit[direction]) {
-    return unit[direction](value);
-  }
+// Convert serializable unit to client unit with executable functions
+function createClientUnit(unit: SerializableUnit): ClientUnit {
+  // Create actual functions from string representations
+  const toBase = new Function('value', `return ${unit.toBaseStr}`) as (value: number) => number;
+  const fromBase = new Function('value', `return ${unit.fromBaseStr}`) as (value: number) => number;
   
-  // If it has a string-based function, evaluate it
-  const fnStr = direction === 'toBase' ? unit.toBaseStr : unit.fromBaseStr;
-  if (fnStr) {
-    try {
-      // Create a function from the string and execute it
-      const fn = new Function('value', `return ${fnStr}`);
-      return fn(value);
-    } catch (error) {
-      console.error(`Error evaluating ${direction} function:`, error);
-      return value; // Return original value on error
-    }
-  }
-  
-  // If no conversion function is available, return the original value
-  return value;
-};
+  return {
+    ...unit,
+    toBase,
+    fromBase
+  };
+}
 
 export default function DensityCalculator() {
-  const allDensityUnits = densityUnits[0].units;
+  // Convert serializable units to client units with actual functions
+  const allDensityUnits = useMemo(() => {
+    return densityUnits[0].units.map(createClientUnit);
+  }, []);
 
   // State for the primary input values
   const [density, setDensity] = useState<string>('1000');
@@ -53,7 +38,7 @@ export default function DensityCalculator() {
   const [volume, setVolume] = useState<string>('0.001');
   
   // State for the units
-  const [densityUnit, setDensityUnit] = useState<ExtendedUnit>(allDensityUnits[0]); // kg/m³
+  const [densityUnit, setDensityUnit] = useState<ClientUnit>(allDensityUnits[0]); // kg/m³
   const [massUnit, setMassUnit] = useState<string>('kg');
   const [volumeUnit, setVolumeUnit] = useState<string>('m3');
   
@@ -110,7 +95,7 @@ export default function DensityCalculator() {
         setFormula(`Volume = Mass / Density = ${mass} ${massUnit} / ${materialDensity} ${selectedUnit.symbol} = ${formatNumber(newVolume)} ${volumeUnit}`);
       }
     }
-  }, [mode, mass, volume, volumeUnit, massUnit]);
+  }, [mode, mass, volume, volumeUnit, massUnit, allDensityUnits]);
   
   // Calculate when inputs change
   useEffect(() => {
