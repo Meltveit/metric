@@ -1,19 +1,14 @@
-import type { Metadata } from 'next';
+'use client'; // Add this line to make the component a client component
+
 import dynamic from 'next/dynamic';
 import InfoBox from '@/components/calculators/InfoBox';
 import { BarChart4, Scale } from 'lucide-react';
 
-// Import the DensityCalculator component with dynamic import to ensure client-side rendering
+// Import the DensityCalculator component with dynamic import
 const DensityCalculator = dynamic(
   () => import('@/components/calculators/DensityCalculator'),
-  { ssr: false } // Disable server-side rendering to avoid serialization errors
+  { ssr: true } // Changed from false to true
 );
-
-export const metadata: Metadata = {
-  title: 'Density Calculator and Converter | MetricCalc',
-  description: 'Calculate and convert density between different units. Convert between kg/m³, g/cm³, lb/ft³ and more with our free online calculator.',
-  keywords: 'density calculator, density converter, kg/m³ to g/cm³, g/cm³ to kg/m³, lb/ft³ converter, specific gravity',
-};
 
 export default function DensityPage() {
   return (
@@ -141,7 +136,7 @@ export default function DensityPage() {
             <div>
               <h3 className="font-semibold">Why do some objects float while others sink?</h3>
               <p className="text-gray-700 dark:text-gray-300">
-                Objects float when their density is less than the density of the liquid they're placed in. For example, 
+                Objects float when their density is less than the density of the liquid they&apos;re placed in. For example, 
                 wood (density ~600-700 kg/m³) floats in water (density 1,000 kg/m³), while iron (density ~7,870 kg/m³) sinks.
               </p>
             </div>

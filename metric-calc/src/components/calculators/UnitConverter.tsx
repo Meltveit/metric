@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
 import { useUnitConversion } from '@/hooks/useUnitConversion';
-import { UnitGroup, SerializableUnit, createClientUnit, ClientUnit } from '@/types/units';
+import { UnitGroup, createClientUnit } from '@/types/units';
 
 interface UnitConverterProps {
   unitGroups: UnitGroup[];

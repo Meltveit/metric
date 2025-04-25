@@ -1,5 +1,3 @@
-import { UnitGroup } from '@/types/units';
-
 // Define serializable unit type without actual functions
 export interface SerializableUnit {
   code: string;

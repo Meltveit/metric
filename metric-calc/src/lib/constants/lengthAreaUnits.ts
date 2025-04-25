@@ -1,5 +1,5 @@
 // src/lib/constants/lengthAreaUnits.ts
-import { UnitGroup, SerializableUnit, createSerializableUnit } from '@/types/units';
+import { UnitGroup, createSerializableUnit } from '@/types/units';
 
 export const lengthAreaUnits: UnitGroup[] = [
   {

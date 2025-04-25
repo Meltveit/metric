@@ -1,5 +1,5 @@
 // src/lib/constants/dataStorageUnits.ts
-import { UnitGroup, SerializableUnit, createSerializableUnit } from '@/types/units';
+import { UnitGroup, createSerializableUnit } from '@/types/units';
 
 export const dataStorageUnits: UnitGroup[] = [
   {
