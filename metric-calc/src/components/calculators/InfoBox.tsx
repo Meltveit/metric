@@ -16,19 +16,19 @@ export default function InfoBox({ title, content, className, icon }: InfoBoxProp
     )}>
       <div className="flex items-center mb-3">
         {icon && <div className="mr-3">{icon}</div>}
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
       </div>
       
       {Array.isArray(content) ? (
         <ul className="space-y-2">
           {content.map((item, index) => (
-            <li key={index} className="text-gray-700 dark:text-gray-300 text-sm">
+            <li key={index} className="text-gray-800 dark:text-gray-200 text-sm font-medium">
               {item}
             </li>
           ))}
         </ul>
       ) : (
-        <div className="text-gray-700 dark:text-gray-300 text-sm">
+        <div className="text-gray-800 dark:text-gray-200 text-sm">
           {content}
         </div>
       )}

@@ -66,7 +66,7 @@ export default function TemperatureConverter() {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <label htmlFor="fromValue" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="fromValue" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
             Value
           </label>
           <input
@@ -74,12 +74,12 @@ export default function TemperatureConverter() {
             id="fromValue"
             value={fromValue}
             onChange={(e) => setFromValue(e.target.value)}
-            className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white"
+            className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white text-base"
             placeholder="Enter value"
           />
           
           <div className="mt-4">
-            <label htmlFor="fromUnit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="fromUnit" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               From Unit
             </label>
             <select
@@ -89,7 +89,7 @@ export default function TemperatureConverter() {
                 const selectedUnit = temperatureUnits.find(unit => unit.code === e.target.value);
                 if (selectedUnit) setFromUnit(selectedUnit);
               }}
-              className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white"
+              className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white text-base"
             >
               {temperatureUnits.map((unit) => (
                 <option key={unit.code} value={unit.code}>
@@ -102,7 +102,7 @@ export default function TemperatureConverter() {
         
         <div>
           <div className="flex justify-between items-center">
-            <label htmlFor="toValue" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="toValue" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               Result
             </label>
             <button
@@ -119,12 +119,12 @@ export default function TemperatureConverter() {
             id="toValue"
             value={toValue}
             readOnly
-            className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 bg-gray-50 dark:bg-gray-700 dark:text-white"
+            className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 bg-gray-50 dark:bg-gray-700 dark:text-white text-base"
             placeholder="Result"
           />
           
           <div className="mt-4">
-            <label htmlFor="toUnit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="toUnit" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               To Unit
             </label>
             <select
@@ -134,7 +134,7 @@ export default function TemperatureConverter() {
                 const selectedUnit = temperatureUnits.find(unit => unit.code === e.target.value);
                 if (selectedUnit) setToUnit(selectedUnit);
               }}
-              className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white"
+              className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white text-base"
             >
               {temperatureUnits.map((unit) => (
                 <option key={unit.code} value={unit.code}>
@@ -147,14 +147,14 @@ export default function TemperatureConverter() {
       </div>
       
       {formula && (
-        <div className="formula-box mt-8">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Formula</h3>
-          <p className="text-gray-700 dark:text-gray-300">{formula}</p>
+        <div className="formula-box mt-8 text-base">
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Formula</h3>
+          <p className="text-gray-700 dark:text-gray-200 font-medium">{formula}</p>
         </div>
       )}
       
       <div className="mt-8">
-        <h3 className="text-lg font-medium mb-4">Common Temperature Points</h3>
+        <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-white">Common Temperature Points</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <button
             onClick={() => setPresetConversion('c', 'f', 0)}
@@ -162,7 +162,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Freezing Point (0°C)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Freezing Point (0°C)</span>
             </div>
           </button>
           
@@ -172,7 +172,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Boiling Point (100°C)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Boiling Point (100°C)</span>
             </div>
           </button>
           
@@ -182,7 +182,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Body Temperature (98.6°F)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Body Temperature (98.6°F)</span>
             </div>
           </button>
           
@@ -192,7 +192,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Absolute Zero (0K)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Absolute Zero (0K)</span>
             </div>
           </button>
           
@@ -202,7 +202,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Freezing Point in Kelvin (0°C)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Freezing Point in Kelvin (0°C)</span>
             </div>
           </button>
           
@@ -212,7 +212,7 @@ export default function TemperatureConverter() {
           >
             <div className="flex items-center">
               <Thermometer className="text-primary mr-2 h-5 w-5" />
-              <span className="block font-medium">Freezing Point (32°F)</span>
+              <span className="block font-medium text-gray-800 dark:text-gray-200">Freezing Point (32°F)</span>
             </div>
           </button>
         </div>

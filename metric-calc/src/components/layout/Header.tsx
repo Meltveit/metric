@@ -23,7 +23,7 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-1.5-14 0-.3-1.5-1.5-2-3-2"></path><path d="M3 7v12h18V7"></path><path d="M7 22v-3"></path><path d="M17 22v-3"></path><path d="M12 7v8"></path><path d="M9 11h6"></path></svg>
-            <span className="text-xl font-semibold text-gray-900 dark:text-white">MetricCalc</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">MetricCalc</span>
           </Link>
         </div>
 
@@ -33,7 +33,7 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white transition-colors"
+              className="text-gray-800 hover:text-primary dark:text-gray-200 dark:hover:text-white transition-colors font-medium text-base"
             >
               {item.name}
             </Link>
@@ -67,7 +67,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-bold text-gray-900 hover:bg-gray-100 hover:text-primary dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}

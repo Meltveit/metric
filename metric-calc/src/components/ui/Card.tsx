@@ -23,9 +23,9 @@ export function Card({ title, description, href, icon, className }: CardProps) {
           <div className="p-2 bg-primary/10 rounded-lg text-primary mr-4">
             {icon}
           </div>
-          <h3 className="font-semibold text-lg">{title}</h3>
+          <h3 className="font-bold text-lg text-gray-900 dark:text-white">{title}</h3>
         </div>
-        <p className="text-gray-600 dark:text-gray-400 text-sm">{description}</p>
+        <p className="text-gray-800 dark:text-gray-100 text-base font-medium">{description}</p>
       </div>
     </Link>
   );
