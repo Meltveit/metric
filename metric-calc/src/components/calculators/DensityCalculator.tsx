@@ -3,21 +3,57 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Calculator } from 'lucide-react';
 import { densityUnits, commonMaterials, calculateDensity, calculateMass, calculateVolume } from '@/lib/constants/densityUnits';
-import { ConversionUnit } from '@/types/units';
 import { formatNumber } from '@/lib/utils';
 
-const allDensityUnits = densityUnits[0].units;
+// Extended type to include string-based conversion functions
+interface ExtendedUnit {
+  code: string;
+  name: string;
+  symbol: string;
+  // String-based conversion functions
+  toBaseStr?: string;
+  fromBaseStr?: string;
+  // Regular conversion functions (for backward compatibility)
+  toBase?: (value: number) => number;
+  fromBase?: (value: number) => number;
+}
 
 type CalculationMode = 'density' | 'mass' | 'volume';
 
+// Helper function to convert using string-based or regular function
+const convertValue = (value: number, unit: ExtendedUnit, direction: 'toBase' | 'fromBase'): number => {
+  // If the unit has a regular function, use it
+  if (unit[direction]) {
+    return unit[direction](value);
+  }
+  
+  // If it has a string-based function, evaluate it
+  const fnStr = direction === 'toBase' ? unit.toBaseStr : unit.fromBaseStr;
+  if (fnStr) {
+    try {
+      // Create a function from the string and execute it
+      const fn = new Function('value', `return ${fnStr}`);
+      return fn(value);
+    } catch (error) {
+      console.error(`Error evaluating ${direction} function:`, error);
+      return value; // Return original value on error
+    }
+  }
+  
+  // If no conversion function is available, return the original value
+  return value;
+};
+
 export default function DensityCalculator() {
+  const allDensityUnits = densityUnits[0].units;
+
   // State for the primary input values
   const [density, setDensity] = useState<string>('1000');
   const [mass, setMass] = useState<string>('1');
   const [volume, setVolume] = useState<string>('0.001');
   
   // State for the units
-  const [densityUnit, setDensityUnit] = useState<ConversionUnit>(allDensityUnits[0]); // kg/m³
+  const [densityUnit, setDensityUnit] = useState<ExtendedUnit>(allDensityUnits[0]); // kg/m³
   const [massUnit, setMassUnit] = useState<string>('kg');
   const [volumeUnit, setVolumeUnit] = useState<string>('m3');
   

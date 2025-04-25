@@ -1,86 +1,82 @@
+// Modified version of densityUnits.ts
+// This version uses string-based conversion functions that can be safely serialized
+
 import { UnitGroup } from '@/types/units';
 
+// Define conversion functions as strings that will be evaluated on the client side
+const conversionFunctions = {
+  // Identity conversion
+  identity: {
+    toBase: 'value => value',
+    fromBase: 'value => value'
+  },
+  // Gram per cubic centimeter (g/cm³) conversion
+  g_cm3: {
+    toBase: 'value => value * 1000',
+    fromBase: 'value => value / 1000'
+  },
+  // Kilogram per liter (kg/L) conversion
+  kg_l: {
+    toBase: 'value => value * 1000',
+    fromBase: 'value => value / 1000'
+  },
+  // Pound per cubic foot (lb/ft³) conversion
+  lb_ft3: {
+    toBase: 'value => value * 16.0185',
+    fromBase: 'value => value / 16.0185'
+  },
+  // Pound per cubic inch (lb/in³) conversion
+  lb_in3: {
+    toBase: 'value => value * 27679.9',
+    fromBase: 'value => value / 27679.9'
+  },
+  // Pound per US gallon (lb/gal) conversion
+  lb_gal_us: {
+    toBase: 'value => value * 119.826',
+    fromBase: 'value => value / 119.826'
+  },
+  // Ounce per cubic inch (oz/in³) conversion
+  oz_in3: {
+    toBase: 'value => value * 1729.99',
+    fromBase: 'value => value / 1729.99'
+  },
+  // Ounce per US gallon (oz/gal) conversion
+  oz_gal_us: {
+    toBase: 'value => value * 7.48915',
+    fromBase: 'value => value / 7.48915'
+  },
+  // Specific gravity (SG) conversion
+  sg: {
+    toBase: 'value => value * 1000',
+    fromBase: 'value => value / 1000'
+  }
+};
+
+// Helper to create the unit with string-based conversion functions
+const createUnit = (code, name, symbol, conversionType) => ({
+  code,
+  name,
+  symbol,
+  toBaseStr: conversionFunctions[conversionType]?.toBase || conversionFunctions.identity.toBase,
+  fromBaseStr: conversionFunctions[conversionType]?.fromBase || conversionFunctions.identity.fromBase
+});
+
+// Define density units using our new approach
 export const densityUnits: UnitGroup[] = [
   {
     name: 'Density',
     units: [
-      {
-        code: 'kg_m3',
-        name: 'Kilogram per Cubic Meter',
-        symbol: 'kg/m³',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'g_cm3',
-        name: 'Gram per Cubic Centimeter',
-        symbol: 'g/cm³',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'g_ml',
-        name: 'Gram per Milliliter',
-        symbol: 'g/mL',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'g_l',
-        name: 'Gram per Liter',
-        symbol: 'g/L',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'kg_l',
-        name: 'Kilogram per Liter',
-        symbol: 'kg/L',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'lb_ft3',
-        name: 'Pound per Cubic Foot',
-        symbol: 'lb/ft³',
-        toBase: value => value * 16.0185,
-        fromBase: value => value / 16.0185
-      },
-      {
-        code: 'lb_in3',
-        name: 'Pound per Cubic Inch',
-        symbol: 'lb/in³',
-        toBase: value => value * 27679.9,
-        fromBase: value => value / 27679.9
-      },
-      {
-        code: 'lb_gal_us',
-        name: 'Pound per US Gallon',
-        symbol: 'lb/gal',
-        toBase: value => value * 119.826,
-        fromBase: value => value / 119.826
-      },
-      {
-        code: 'oz_in3',
-        name: 'Ounce per Cubic Inch',
-        symbol: 'oz/in³',
-        toBase: value => value * 1729.99,
-        fromBase: value => value / 1729.99
-      },
-      {
-        code: 'oz_gal_us',
-        name: 'Ounce per US Gallon',
-        symbol: 'oz/gal',
-        toBase: value => value * 7.48915,
-        fromBase: value => value / 7.48915
-      },
-      {
-        code: 'sg',
-        name: 'Specific Gravity (Relative to Water)',
-        symbol: 'SG',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      }
+      createUnit('kg_m3', 'Kilogram per Cubic Meter', 'kg/m³', 'identity'),
+      createUnit('g_cm3', 'Gram per Cubic Centimeter', 'g/cm³', 'g_cm3'),
+      createUnit('g_ml', 'Gram per Milliliter', 'g/mL', 'g_cm3'),
+      createUnit('g_l', 'Gram per Liter', 'g/L', 'identity'),
+      createUnit('kg_l', 'Kilogram per Liter', 'kg/L', 'kg_l'),
+      createUnit('lb_ft3', 'Pound per Cubic Foot', 'lb/ft³', 'lb_ft3'),
+      createUnit('lb_in3', 'Pound per Cubic Inch', 'lb/in³', 'lb_in3'),
+      createUnit('lb_gal_us', 'Pound per US Gallon', 'lb/gal', 'lb_gal_us'),
+      createUnit('oz_in3', 'Ounce per Cubic Inch', 'oz/in³', 'oz_in3'),
+      createUnit('oz_gal_us', 'Ounce per US Gallon', 'oz/gal', 'oz_gal_us'),
+      createUnit('sg', 'Specific Gravity (Relative to Water)', 'SG', 'sg')
     ]
   }
 ];
