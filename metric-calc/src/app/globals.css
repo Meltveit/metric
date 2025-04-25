@@ -51,7 +51,7 @@
  
     --muted: 217.2 32.6% 17.5%;
     /* Increase contrast for muted text in dark mode */
-    --muted-foreground: 215 20.2% 75%;
+    --muted-foreground: 215 20.2% 85%;
  
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
@@ -72,11 +72,23 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Make sure SVG icons display correctly */
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
   }
 
   h1 {
     font-size: 2.25rem; /* text-3xl */
-    font-weight: 700; /* font-bold */
+    font-weight: 800; /* font-extrabold */
+    color: hsl(222.2 84% 4.9%);
+  }
+  .dark h1 {
+    color: hsl(210 40% 98%);
   }
   @media (min-width: 768px) {
     h1 {
@@ -87,6 +99,10 @@
   h2 {
     font-size: 1.875rem; /* text-2xl */
     font-weight: 700; /* font-bold */
+    color: hsl(222.2 84% 4.9%);
+  }
+  .dark h2 {
+    color: hsl(210 40% 98%);
   }
   @media (min-width: 768px) {
     h2 {
@@ -97,6 +113,10 @@
   h3 {
     font-size: 1.5rem; /* text-xl */
     font-weight: 700; /* font-bold */
+    color: hsl(222.2 84% 4.9%);
+  }
+  .dark h3 {
+    color: hsl(210 40% 98%);
   }
   @media (min-width: 768px) {
     h3 {
@@ -107,11 +127,24 @@
   h4 {
     font-size: 1.25rem; /* text-lg */
     font-weight: 700; /* font-bold */
+    color: hsl(222.2 84% 4.9%);
+  }
+  .dark h4 {
+    color: hsl(210 40% 98%);
   }
   @media (min-width: 768px) {
     h4 {
       font-size: 1.5rem; /* md:text-xl */
     }
+  }
+
+  p {
+    color: hsl(222.2 47.4% 11.2%);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .dark p {
+    color: hsl(210 40% 98%);
   }
 }
 
@@ -120,6 +153,7 @@
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
+  height: 16rem; /* h-64, ensure all cards are the same height */
 }
 
 .converter-card:hover {
@@ -133,36 +167,83 @@
   padding: 1rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
-  font-family: monospace;
-  font-size: 0.875rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
   color: hsl(224 76% 15% / 1); /* Darker text for better contrast */
   border: 1px solid hsl(214 90% 86% / 1);
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .dark .formula-box {
   background-color: hsl(224 76% 10% / 1);
-  color: hsl(210 40% 90% / 1); /* Lighter text for better contrast in dark mode */
+  color: hsl(210 40% 95% / 1); /* Lighter text for better contrast in dark mode */
   border: 1px solid hsl(220 76% 20% / 1);
 }
 
 /* Better text contrast for form elements */
 select, input {
   color: hsl(222.2 84% 4.9% / 1);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .dark select, .dark input {
   color: hsl(210 40% 98% / 1);
+}
+
+select option {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Icon container styles */
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+}
+
+/* Improved text contrast in general classes */
+.text-gray-700 {
+  color: hsl(224 76% 15% / 1) !important;
   font-weight: 500;
 }
 
-/* Improve text contrast in infoboxes */
-.text-gray-700 {
-  color: hsl(224 76% 15% / 1);
+.dark .text-gray-300 {
+  color: hsl(210 40% 95% / 1) !important;
+  font-weight: 500;
 }
 
-.dark .text-gray-300 {
-  color: hsl(210 40% 90% / 1);
+.text-gray-600 {
+  color: hsl(224 76% 25% / 1) !important;
+  font-weight: 500;
+}
+
+.dark .text-gray-400 {
+  color: hsl(210 40% 85% / 1) !important;
+  font-weight: 500;
+}
+
+/* Improved prose styles for better text clarity */
+.prose {
+  --tw-prose-body: hsl(224 76% 15% / 1);
+  --tw-prose-headings: hsl(222.2 84% 4.9% / 1);
+  --tw-prose-lead: hsl(224 76% 15% / 1);
+  --tw-prose-links: hsl(221.2 83.2% 53.3%);
+  --tw-prose-bold: hsl(222.2 84% 4.9% / 1);
+  font-weight: 500;
+}
+
+.dark .prose {
+  --tw-prose-body: hsl(210 40% 95% / 1);
+  --tw-prose-headings: hsl(210 40% 98% / 1);
+  --tw-prose-lead: hsl(210 40% 95% / 1);
+  --tw-prose-links: hsl(217.2 91.2% 59.8%);
+  --tw-prose-bold: hsl(210 40% 98% / 1);
 }
 
 input[type="number"]::-webkit-inner-spin-button,
