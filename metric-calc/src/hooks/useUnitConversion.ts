@@ -2,11 +2,11 @@
 
 import { useState, useCallback } from 'react';
 import { formatNumber } from '@/lib/utils';
-import { ConversionUnit, ConversionResult } from '@/types/units';
+import { ClientUnit, ConversionResult } from '@/types/units';
 
 interface UseUnitConversionProps {
-  defaultFromUnit: ConversionUnit;
-  defaultToUnit: ConversionUnit;
+  defaultFromUnit: ClientUnit;
+  defaultToUnit: ClientUnit;
   defaultValue?: number;
 }
 
@@ -16,12 +16,12 @@ export function useUnitConversion({
   defaultValue = 1
 }: UseUnitConversionProps) {
   const [fromValue, setFromValue] = useState<string>(defaultValue.toString());
-  const [fromUnit, setFromUnit] = useState<ConversionUnit>(defaultFromUnit);
-  const [toUnit, setToUnit] = useState<ConversionUnit>(defaultToUnit);
+  const [fromUnit, setFromUnit] = useState<ClientUnit>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<ClientUnit>(defaultToUnit);
   const [toValue, setToValue] = useState<string>('');
   const [formula, setFormula] = useState<string>('');
 
-  // Update the formula displayed - removed unused parameters
+  // Update the formula displayed
   const updateFormula = useCallback(() => {
     const conversionFactor = toUnit.fromBase(fromUnit.toBase(1));
     
@@ -50,7 +50,7 @@ export function useUnitConversion({
     // Update the result value
     setToValue(formatNumber(result));
 
-    // Update formula - no parameters needed
+    // Update formula
     updateFormula();
   }, [fromValue, fromUnit, toUnit, updateFormula]);
 
@@ -66,7 +66,7 @@ export function useUnitConversion({
   }, [fromUnit, toUnit, toValue]);
 
   // Set preset conversion
-  const setPresetConversion = useCallback((fromUnitValue: ConversionUnit, toUnitValue: ConversionUnit, value: number) => {
+  const setPresetConversion = useCallback((fromUnitValue: ClientUnit, toUnitValue: ClientUnit, value: number) => {
     setFromUnit(fromUnitValue);
     setToUnit(toUnitValue);
     setFromValue(value.toString());

@@ -1,161 +1,162 @@
-import { UnitGroup } from '@/types/units';
+// src/lib/constants/lengthAreaUnits.ts
+import { UnitGroup, SerializableUnit, createSerializableUnit } from '@/types/units';
 
 export const lengthAreaUnits: UnitGroup[] = [
   {
     name: 'Length',
     units: [
-      {
-        code: 'm',
-        name: 'Meter',
-        symbol: 'm',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'km',
-        name: 'Kilometer',
-        symbol: 'km',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'cm',
-        name: 'Centimeter',
-        symbol: 'cm',
-        toBase: value => value / 100,
-        fromBase: value => value * 100
-      },
-      {
-        code: 'mm',
-        name: 'Millimeter',
-        symbol: 'mm',
-        toBase: value => value / 1000,
-        fromBase: value => value * 1000
-      },
-      {
-        code: 'um',
-        name: 'Micrometer',
-        symbol: 'μm',
-        toBase: value => value / 1000000,
-        fromBase: value => value * 1000000
-      },
-      {
-        code: 'nm',
-        name: 'Nanometer',
-        symbol: 'nm',
-        toBase: value => value / 1000000000,
-        fromBase: value => value * 1000000000
-      },
-      {
-        code: 'mi',
-        name: 'Mile',
-        symbol: 'mi',
-        toBase: value => value * 1609.344,
-        fromBase: value => value / 1609.344
-      },
-      {
-        code: 'yd',
-        name: 'Yard',
-        symbol: 'yd',
-        toBase: value => value * 0.9144,
-        fromBase: value => value / 0.9144
-      },
-      {
-        code: 'ft',
-        name: 'Foot',
-        symbol: 'ft',
-        toBase: value => value * 0.3048,
-        fromBase: value => value / 0.3048
-      },
-      {
-        code: 'in',
-        name: 'Inch',
-        symbol: 'in',
-        toBase: value => value * 0.0254,
-        fromBase: value => value / 0.0254
-      },
-      {
-        code: 'nmi',
-        name: 'Nautical Mile',
-        symbol: 'nmi',
-        toBase: value => value * 1852,
-        fromBase: value => value / 1852
-      }
+      createSerializableUnit(
+        'm',
+        'Meter',
+        'm',
+        'value => value',
+        'value => value'
+      ),
+      createSerializableUnit(
+        'km',
+        'Kilometer',
+        'km',
+        'value => value * 1000',
+        'value => value / 1000'
+      ),
+      createSerializableUnit(
+        'cm',
+        'Centimeter',
+        'cm',
+        'value => value / 100',
+        'value => value * 100'
+      ),
+      createSerializableUnit(
+        'mm',
+        'Millimeter',
+        'mm',
+        'value => value / 1000',
+        'value => value * 1000'
+      ),
+      createSerializableUnit(
+        'um',
+        'Micrometer',
+        'μm',
+        'value => value / 1000000',
+        'value => value * 1000000'
+      ),
+      createSerializableUnit(
+        'nm',
+        'Nanometer',
+        'nm',
+        'value => value / 1000000000',
+        'value => value * 1000000000'
+      ),
+      createSerializableUnit(
+        'mi',
+        'Mile',
+        'mi',
+        'value => value * 1609.344',
+        'value => value / 1609.344'
+      ),
+      createSerializableUnit(
+        'yd',
+        'Yard',
+        'yd',
+        'value => value * 0.9144',
+        'value => value / 0.9144'
+      ),
+      createSerializableUnit(
+        'ft',
+        'Foot',
+        'ft',
+        'value => value * 0.3048',
+        'value => value / 0.3048'
+      ),
+      createSerializableUnit(
+        'in',
+        'Inch',
+        'in',
+        'value => value * 0.0254',
+        'value => value / 0.0254'
+      ),
+      createSerializableUnit(
+        'nmi',
+        'Nautical Mile',
+        'nmi',
+        'value => value * 1852',
+        'value => value / 1852'
+      )
     ]
   },
   {
     name: 'Area',
     units: [
-      {
-        code: 'm2',
-        name: 'Square Meter',
-        symbol: 'm²',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'km2',
-        name: 'Square Kilometer',
-        symbol: 'km²',
-        toBase: value => value * 1000000,
-        fromBase: value => value / 1000000
-      },
-      {
-        code: 'cm2',
-        name: 'Square Centimeter',
-        symbol: 'cm²',
-        toBase: value => value / 10000,
-        fromBase: value => value * 10000
-      },
-      {
-        code: 'mm2',
-        name: 'Square Millimeter',
-        symbol: 'mm²',
-        toBase: value => value / 1000000,
-        fromBase: value => value * 1000000
-      },
-      {
-        code: 'ha',
-        name: 'Hectare',
-        symbol: 'ha',
-        toBase: value => value * 10000,
-        fromBase: value => value / 10000
-      },
-      {
-        code: 'acre',
-        name: 'Acre',
-        symbol: 'acre',
-        toBase: value => value * 4046.8564224,
-        fromBase: value => value / 4046.8564224
-      },
-      {
-        code: 'mi2',
-        name: 'Square Mile',
-        symbol: 'mi²',
-        toBase: value => value * 2589988.110336,
-        fromBase: value => value / 2589988.110336
-      },
-      {
-        code: 'yd2',
-        name: 'Square Yard',
-        symbol: 'yd²',
-        toBase: value => value * 0.83612736,
-        fromBase: value => value / 0.83612736
-      },
-      {
-        code: 'ft2',
-        name: 'Square Foot',
-        symbol: 'ft²',
-        toBase: value => value * 0.09290304,
-        fromBase: value => value / 0.09290304
-      },
-      {
-        code: 'in2',
-        name: 'Square Inch',
-        symbol: 'in²',
-        toBase: value => value * 0.00064516,
-        fromBase: value => value / 0.00064516
-      }
+      createSerializableUnit(
+        'm2',
+        'Square Meter',
+        'm²',
+        'value => value',
+        'value => value'
+      ),
+      createSerializableUnit(
+        'km2',
+        'Square Kilometer',
+        'km²',
+        'value => value * 1000000',
+        'value => value / 1000000'
+      ),
+      createSerializableUnit(
+        'cm2',
+        'Square Centimeter',
+        'cm²',
+        'value => value / 10000',
+        'value => value * 10000'
+      ),
+      createSerializableUnit(
+        'mm2',
+        'Square Millimeter',
+        'mm²',
+        'value => value / 1000000',
+        'value => value * 1000000'
+      ),
+      createSerializableUnit(
+        'ha',
+        'Hectare',
+        'ha',
+        'value => value * 10000',
+        'value => value / 10000'
+      ),
+      createSerializableUnit(
+        'acre',
+        'Acre',
+        'acre',
+        'value => value * 4046.8564224',
+        'value => value / 4046.8564224'
+      ),
+      createSerializableUnit(
+        'mi2',
+        'Square Mile',
+        'mi²',
+        'value => value * 2589988.110336',
+        'value => value / 2589988.110336'
+      ),
+      createSerializableUnit(
+        'yd2',
+        'Square Yard',
+        'yd²',
+        'value => value * 0.83612736',
+        'value => value / 0.83612736'
+      ),
+      createSerializableUnit(
+        'ft2',
+        'Square Foot',
+        'ft²',
+        'value => value * 0.09290304',
+        'value => value / 0.09290304'
+      ),
+      createSerializableUnit(
+        'in2',
+        'Square Inch',
+        'in²',
+        'value => value * 0.00064516',
+        'value => value / 0.00064516'
+      )
     ]
   }
 ];

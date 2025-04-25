@@ -1,145 +1,146 @@
-import { UnitGroup } from '@/types/units';
+// src/lib/constants/dataStorageUnits.ts
+import { UnitGroup, SerializableUnit, createSerializableUnit } from '@/types/units';
 
 export const dataStorageUnits: UnitGroup[] = [
   {
     name: 'Decimal (SI)',
     units: [
-      {
-        code: 'b',
-        name: 'Byte',
-        symbol: 'B',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'kb',
-        name: 'Kilobyte',
-        symbol: 'KB',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'mb',
-        name: 'Megabyte',
-        symbol: 'MB',
-        toBase: value => value * 1000 * 1000,
-        fromBase: value => value / (1000 * 1000)
-      },
-      {
-        code: 'gb',
-        name: 'Gigabyte',
-        symbol: 'GB',
-        toBase: value => value * 1000 * 1000 * 1000,
-        fromBase: value => value / (1000 * 1000 * 1000)
-      },
-      {
-        code: 'tb',
-        name: 'Terabyte',
-        symbol: 'TB',
-        toBase: value => value * 1000 * 1000 * 1000 * 1000,
-        fromBase: value => value / (1000 * 1000 * 1000 * 1000)
-      },
-      {
-        code: 'pb',
-        name: 'Petabyte',
-        symbol: 'PB',
-        toBase: value => value * 1000 * 1000 * 1000 * 1000 * 1000,
-        fromBase: value => value / (1000 * 1000 * 1000 * 1000 * 1000)
-      },
-      {
-        code: 'eb',
-        name: 'Exabyte',
-        symbol: 'EB',
-        toBase: value => value * 1000 * 1000 * 1000 * 1000 * 1000 * 1000,
-        fromBase: value => value / (1000 * 1000 * 1000 * 1000 * 1000 * 1000)
-      }
+      createSerializableUnit(
+        'b',
+        'Byte',
+        'B',
+        'value => value',
+        'value => value'
+      ),
+      createSerializableUnit(
+        'kb',
+        'Kilobyte',
+        'KB',
+        'value => value * 1000',
+        'value => value / 1000'
+      ),
+      createSerializableUnit(
+        'mb',
+        'Megabyte',
+        'MB',
+        'value => value * 1000 * 1000',
+        'value => value / (1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'gb',
+        'Gigabyte',
+        'GB',
+        'value => value * 1000 * 1000 * 1000',
+        'value => value / (1000 * 1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'tb',
+        'Terabyte',
+        'TB',
+        'value => value * 1000 * 1000 * 1000 * 1000',
+        'value => value / (1000 * 1000 * 1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'pb',
+        'Petabyte',
+        'PB',
+        'value => value * 1000 * 1000 * 1000 * 1000 * 1000',
+        'value => value / (1000 * 1000 * 1000 * 1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'eb',
+        'Exabyte',
+        'EB',
+        'value => value * 1000 * 1000 * 1000 * 1000 * 1000 * 1000',
+        'value => value / (1000 * 1000 * 1000 * 1000 * 1000 * 1000)'
+      )
     ]
   },
   {
     name: 'Binary (IEC)',
     units: [
-      {
-        code: 'kib',
-        name: 'Kibibyte',
-        symbol: 'KiB',
-        toBase: value => value * 1024,
-        fromBase: value => value / 1024
-      },
-      {
-        code: 'mib',
-        name: 'Mebibyte',
-        symbol: 'MiB',
-        toBase: value => value * 1024 * 1024,
-        fromBase: value => value / (1024 * 1024)
-      },
-      {
-        code: 'gib',
-        name: 'Gibibyte',
-        symbol: 'GiB',
-        toBase: value => value * 1024 * 1024 * 1024,
-        fromBase: value => value / (1024 * 1024 * 1024)
-      },
-      {
-        code: 'tib',
-        name: 'Tebibyte',
-        symbol: 'TiB',
-        toBase: value => value * 1024 * 1024 * 1024 * 1024,
-        fromBase: value => value / (1024 * 1024 * 1024 * 1024)
-      },
-      {
-        code: 'pib',
-        name: 'Pebibyte',
-        symbol: 'PiB',
-        toBase: value => value * 1024 * 1024 * 1024 * 1024 * 1024,
-        fromBase: value => value / (1024 * 1024 * 1024 * 1024 * 1024)
-      },
-      {
-        code: 'eib',
-        name: 'Exbibyte',
-        symbol: 'EiB',
-        toBase: value => value * 1024 * 1024 * 1024 * 1024 * 1024 * 1024,
-        fromBase: value => value / (1024 * 1024 * 1024 * 1024 * 1024 * 1024)
-      }
+      createSerializableUnit(
+        'kib',
+        'Kibibyte',
+        'KiB',
+        'value => value * 1024',
+        'value => value / 1024'
+      ),
+      createSerializableUnit(
+        'mib',
+        'Mebibyte',
+        'MiB',
+        'value => value * 1024 * 1024',
+        'value => value / (1024 * 1024)'
+      ),
+      createSerializableUnit(
+        'gib',
+        'Gibibyte',
+        'GiB',
+        'value => value * 1024 * 1024 * 1024',
+        'value => value / (1024 * 1024 * 1024)'
+      ),
+      createSerializableUnit(
+        'tib',
+        'Tebibyte',
+        'TiB',
+        'value => value * 1024 * 1024 * 1024 * 1024',
+        'value => value / (1024 * 1024 * 1024 * 1024)'
+      ),
+      createSerializableUnit(
+        'pib',
+        'Pebibyte',
+        'PiB',
+        'value => value * 1024 * 1024 * 1024 * 1024 * 1024',
+        'value => value / (1024 * 1024 * 1024 * 1024 * 1024)'
+      ),
+      createSerializableUnit(
+        'eib',
+        'Exbibyte',
+        'EiB',
+        'value => value * 1024 * 1024 * 1024 * 1024 * 1024 * 1024',
+        'value => value / (1024 * 1024 * 1024 * 1024 * 1024 * 1024)'
+      )
     ]
   },
   {
     name: 'Bits',
     units: [
-      {
-        code: 'bit',
-        name: 'Bit',
-        symbol: 'bit',
-        toBase: value => value / 8,
-        fromBase: value => value * 8
-      },
-      {
-        code: 'kbit',
-        name: 'Kilobit',
-        symbol: 'Kb',
-        toBase: value => (value * 1000) / 8,
-        fromBase: value => (value * 8) / 1000
-      },
-      {
-        code: 'mbit',
-        name: 'Megabit',
-        symbol: 'Mb',
-        toBase: value => (value * 1000 * 1000) / 8,
-        fromBase: value => (value * 8) / (1000 * 1000)
-      },
-      {
-        code: 'gbit',
-        name: 'Gigabit',
-        symbol: 'Gb',
-        toBase: value => (value * 1000 * 1000 * 1000) / 8,
-        fromBase: value => (value * 8) / (1000 * 1000 * 1000)
-      },
-      {
-        code: 'tbit',
-        name: 'Terabit',
-        symbol: 'Tb',
-        toBase: value => (value * 1000 * 1000 * 1000 * 1000) / 8,
-        fromBase: value => (value * 8) / (1000 * 1000 * 1000 * 1000)
-      }
+      createSerializableUnit(
+        'bit',
+        'Bit',
+        'bit',
+        'value => value / 8',
+        'value => value * 8'
+      ),
+      createSerializableUnit(
+        'kbit',
+        'Kilobit',
+        'Kb',
+        'value => (value * 1000) / 8',
+        'value => (value * 8) / 1000'
+      ),
+      createSerializableUnit(
+        'mbit',
+        'Megabit',
+        'Mb',
+        'value => (value * 1000 * 1000) / 8',
+        'value => (value * 8) / (1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'gbit',
+        'Gigabit',
+        'Gb',
+        'value => (value * 1000 * 1000 * 1000) / 8',
+        'value => (value * 8) / (1000 * 1000 * 1000)'
+      ),
+      createSerializableUnit(
+        'tbit',
+        'Terabit',
+        'Tb',
+        'value => (value * 1000 * 1000 * 1000 * 1000) / 8',
+        'value => (value * 8) / (1000 * 1000 * 1000 * 1000)'
+      )
     ]
   }
 ];

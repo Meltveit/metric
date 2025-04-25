@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
 import { useUnitConversion } from '@/hooks/useUnitConversion';
-import { UnitGroup } from '@/types/units';
-// Removed unused import: ConversionUnit
+import { UnitGroup, SerializableUnit, createClientUnit, ClientUnit } from '@/types/units';
 
 interface UnitConverterProps {
   unitGroups: UnitGroup[];
@@ -12,8 +11,13 @@ interface UnitConverterProps {
 }
 
 export default function UnitConverter({ unitGroups, className }: UnitConverterProps) {
-  // Get all units from all groups
-  const allUnits = unitGroups.flatMap(group => group.units);
+  // Get all serializable units from all groups
+  const allSerializableUnits = unitGroups.flatMap(group => group.units);
+  
+  // Convert all serializable units to client units with actual functions
+  const allUnits = useMemo(() => {
+    return allSerializableUnits.map(unit => createClientUnit(unit));
+  }, [allSerializableUnits]);
   
   // Use the first unit from the first group as the default "from" unit
   const defaultFromUnit = allUnits[0];
@@ -68,8 +72,11 @@ export default function UnitConverter({ unitGroups, className }: UnitConverterPr
               id="fromUnit"
               value={fromUnit.code}
               onChange={(e) => {
-                const selectedUnit = allUnits.find(unit => unit.code === e.target.value);
-                if (selectedUnit) setFromUnit(selectedUnit);
+                const selectedSerializableUnit = allSerializableUnits.find(unit => unit.code === e.target.value);
+                if (selectedSerializableUnit) {
+                  const selectedUnit = createClientUnit(selectedSerializableUnit);
+                  setFromUnit(selectedUnit);
+                }
               }}
               className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white"
             >
@@ -117,8 +124,11 @@ export default function UnitConverter({ unitGroups, className }: UnitConverterPr
               id="toUnit"
               value={toUnit.code}
               onChange={(e) => {
-                const selectedUnit = allUnits.find(unit => unit.code === e.target.value);
-                if (selectedUnit) setToUnit(selectedUnit);
+                const selectedSerializableUnit = allSerializableUnits.find(unit => unit.code === e.target.value);
+                if (selectedSerializableUnit) {
+                  const selectedUnit = createClientUnit(selectedSerializableUnit);
+                  setToUnit(selectedUnit);
+                }
               }}
               className="w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-800 dark:text-white"
             >

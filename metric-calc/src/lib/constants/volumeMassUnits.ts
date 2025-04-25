@@ -1,182 +1,183 @@
-import { UnitGroup } from '@/types/units';
+// src/lib/constants/volumeMassUnits.ts
+import { UnitGroup, SerializableUnit, createSerializableUnit } from '@/types/units';
 
 export const volumeMassUnits: UnitGroup[] = [
   {
     name: 'Volume',
     units: [
-      {
-        code: 'l',
-        name: 'Liter',
-        symbol: 'L',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'ml',
-        name: 'Milliliter',
-        symbol: 'mL',
-        toBase: value => value / 1000,
-        fromBase: value => value * 1000
-      },
-      {
-        code: 'cl',
-        name: 'Centiliter',
-        symbol: 'cL',
-        toBase: value => value / 100,
-        fromBase: value => value * 100
-      },
-      {
-        code: 'dl',
-        name: 'Deciliter',
-        symbol: 'dL',
-        toBase: value => value / 10,
-        fromBase: value => value * 10
-      },
-      {
-        code: 'm3',
-        name: 'Cubic Meter',
-        symbol: 'm³',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'cm3',
-        name: 'Cubic Centimeter',
-        symbol: 'cm³',
-        toBase: value => value / 1000,
-        fromBase: value => value * 1000
-      },
-      {
-        code: 'mm3',
-        name: 'Cubic Millimeter',
-        symbol: 'mm³',
-        toBase: value => value / 1000000,
-        fromBase: value => value * 1000000
-      },
-      {
-        code: 'gal_us',
-        name: 'US Gallon',
-        symbol: 'gal (US)',
-        toBase: value => value * 3.78541,
-        fromBase: value => value / 3.78541
-      },
-      {
-        code: 'gal_uk',
-        name: 'UK Gallon',
-        symbol: 'gal (UK)',
-        toBase: value => value * 4.54609,
-        fromBase: value => value / 4.54609
-      },
-      {
-        code: 'qt_us',
-        name: 'US Quart',
-        symbol: 'qt (US)',
-        toBase: value => value * 0.946353,
-        fromBase: value => value / 0.946353
-      },
-      {
-        code: 'pt_us',
-        name: 'US Pint',
-        symbol: 'pt (US)',
-        toBase: value => value * 0.473176,
-        fromBase: value => value / 0.473176
-      },
-      {
-        code: 'cup_us',
-        name: 'US Cup',
-        symbol: 'cup (US)',
-        toBase: value => value * 0.236588,
-        fromBase: value => value / 0.236588
-      },
-      {
-        code: 'fl_oz_us',
-        name: 'US Fluid Ounce',
-        symbol: 'fl oz (US)',
-        toBase: value => value * 0.0295735,
-        fromBase: value => value / 0.0295735
-      },
-      {
-        code: 'tbsp_us',
-        name: 'US Tablespoon',
-        symbol: 'tbsp (US)',
-        toBase: value => value * 0.0147868,
-        fromBase: value => value / 0.0147868
-      },
-      {
-        code: 'tsp_us',
-        name: 'US Teaspoon',
-        symbol: 'tsp (US)',
-        toBase: value => value * 0.00492892,
-        fromBase: value => value / 0.00492892
-      }
+      createSerializableUnit(
+        'l',
+        'Liter',
+        'L',
+        'value => value',
+        'value => value'
+      ),
+      createSerializableUnit(
+        'ml',
+        'Milliliter',
+        'mL',
+        'value => value / 1000',
+        'value => value * 1000'
+      ),
+      createSerializableUnit(
+        'cl',
+        'Centiliter',
+        'cL',
+        'value => value / 100',
+        'value => value * 100'
+      ),
+      createSerializableUnit(
+        'dl',
+        'Deciliter',
+        'dL',
+        'value => value / 10',
+        'value => value * 10'
+      ),
+      createSerializableUnit(
+        'm3',
+        'Cubic Meter',
+        'm³',
+        'value => value * 1000',
+        'value => value / 1000'
+      ),
+      createSerializableUnit(
+        'cm3',
+        'Cubic Centimeter',
+        'cm³',
+        'value => value / 1000',
+        'value => value * 1000'
+      ),
+      createSerializableUnit(
+        'mm3',
+        'Cubic Millimeter',
+        'mm³',
+        'value => value / 1000000',
+        'value => value * 1000000'
+      ),
+      createSerializableUnit(
+        'gal_us',
+        'US Gallon',
+        'gal (US)',
+        'value => value * 3.78541',
+        'value => value / 3.78541'
+      ),
+      createSerializableUnit(
+        'gal_uk',
+        'UK Gallon',
+        'gal (UK)',
+        'value => value * 4.54609',
+        'value => value / 4.54609'
+      ),
+      createSerializableUnit(
+        'qt_us',
+        'US Quart',
+        'qt (US)',
+        'value => value * 0.946353',
+        'value => value / 0.946353'
+      ),
+      createSerializableUnit(
+        'pt_us',
+        'US Pint',
+        'pt (US)',
+        'value => value * 0.473176',
+        'value => value / 0.473176'
+      ),
+      createSerializableUnit(
+        'cup_us',
+        'US Cup',
+        'cup (US)',
+        'value => value * 0.236588',
+        'value => value / 0.236588'
+      ),
+      createSerializableUnit(
+        'fl_oz_us',
+        'US Fluid Ounce',
+        'fl oz (US)',
+        'value => value * 0.0295735',
+        'value => value / 0.0295735'
+      ),
+      createSerializableUnit(
+        'tbsp_us',
+        'US Tablespoon',
+        'tbsp (US)',
+        'value => value * 0.0147868',
+        'value => value / 0.0147868'
+      ),
+      createSerializableUnit(
+        'tsp_us',
+        'US Teaspoon',
+        'tsp (US)',
+        'value => value * 0.00492892',
+        'value => value / 0.00492892'
+      )
     ]
   },
   {
     name: 'Mass',
     units: [
-      {
-        code: 'kg',
-        name: 'Kilogram',
-        symbol: 'kg',
-        toBase: value => value,
-        fromBase: value => value
-      },
-      {
-        code: 'g',
-        name: 'Gram',
-        symbol: 'g',
-        toBase: value => value / 1000,
-        fromBase: value => value * 1000
-      },
-      {
-        code: 'mg',
-        name: 'Milligram',
-        symbol: 'mg',
-        toBase: value => value / 1000000,
-        fromBase: value => value * 1000000
-      },
-      {
-        code: 'lb',
-        name: 'Pound',
-        symbol: 'lb',
-        toBase: value => value * 0.45359237,
-        fromBase: value => value / 0.45359237
-      },
-      {
-        code: 'oz',
-        name: 'Ounce',
-        symbol: 'oz',
-        toBase: value => value * 0.0283495231,
-        fromBase: value => value / 0.0283495231
-      },
-      {
-        code: 'stone',
-        name: 'Stone',
-        symbol: 'st',
-        toBase: value => value * 6.35029318,
-        fromBase: value => value / 6.35029318
-      },
-      {
-        code: 'ton_metric',
-        name: 'Metric Ton',
-        symbol: 't',
-        toBase: value => value * 1000,
-        fromBase: value => value / 1000
-      },
-      {
-        code: 'ton_us',
-        name: 'US Ton',
-        symbol: 'ton (US)',
-        toBase: value => value * 907.18474,
-        fromBase: value => value / 907.18474
-      },
-      {
-        code: 'ton_uk',
-        name: 'UK Ton',
-        symbol: 'ton (UK)',
-        toBase: value => value * 1016.0469088,
-        fromBase: value => value / 1016.0469088
-      }
+      createSerializableUnit(
+        'kg',
+        'Kilogram',
+        'kg',
+        'value => value',
+        'value => value'
+      ),
+      createSerializableUnit(
+        'g',
+        'Gram',
+        'g',
+        'value => value / 1000',
+        'value => value * 1000'
+      ),
+      createSerializableUnit(
+        'mg',
+        'Milligram',
+        'mg',
+        'value => value / 1000000',
+        'value => value * 1000000'
+      ),
+      createSerializableUnit(
+        'lb',
+        'Pound',
+        'lb',
+        'value => value * 0.45359237',
+        'value => value / 0.45359237'
+      ),
+      createSerializableUnit(
+        'oz',
+        'Ounce',
+        'oz',
+        'value => value * 0.0283495231',
+        'value => value / 0.0283495231'
+      ),
+      createSerializableUnit(
+        'stone',
+        'Stone',
+        'st',
+        'value => value * 6.35029318',
+        'value => value / 6.35029318'
+      ),
+      createSerializableUnit(
+        'ton_metric',
+        'Metric Ton',
+        't',
+        'value => value * 1000',
+        'value => value / 1000'
+      ),
+      createSerializableUnit(
+        'ton_us',
+        'US Ton',
+        'ton (US)',
+        'value => value * 907.18474',
+        'value => value / 907.18474'
+      ),
+      createSerializableUnit(
+        'ton_uk',
+        'UK Ton',
+        'ton (UK)',
+        'value => value * 1016.0469088',
+        'value => value / 1016.0469088'
+      )
     ]
   }
 ];
